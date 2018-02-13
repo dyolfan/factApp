@@ -17,16 +17,17 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="wrap_content"
             android:dividerPadding="8dp"
-            android:showDividers="end">
+            android:showDividers="end"
+            tools:layout_editor_absoluteY="3dp">
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
                 <ImageButton
-                    android:id="@+id/imageButton2"
+                    android:id="@+id/share"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentRight="true"
@@ -51,7 +52,7 @@
                     android:textStyle="bold" />
 
                 <ImageButton
-                    android:id="@+id/imageButton"
+                    android:id="@+id/backBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
@@ -69,26 +70,28 @@
 
     <TextView
         android:id="@+id/factBox"
-        android:layout_width="272dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="40dp"
-        android:layout_marginStart="40dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginStart="50dp"
         android:layout_marginTop="40dp"
         android:text="Fact Text //We could try to do that the text size changes depending on the lenght of the fact"
         android:textAlignment="center"
         android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/favouriteFact"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
     <Button
         android:id="@+id/voteUpBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginBottom="5dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginStart="45dp"
-        android:backgroundTint="@color/colorPrimary"
+        android:layout_marginEnd="20dp"
+        android:layout_marginStart="35dp"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:text="Vote +"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/getFact"
@@ -110,12 +113,12 @@
 
     <Button
         android:id="@+id/voteDownBtn"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginBottom="5dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginStart="35dp"
-        android:backgroundTint="@color/colorPrimary"
+        android:layout_marginEnd="35dp"
+        android:layout_marginStart="20dp"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:text="Vote -"
         android:textSize="16sp"
         app:layout_constraintBottom_toTopOf="@+id/getFact"
@@ -124,12 +127,12 @@
 
     <Button
         android:id="@+id/getFact"
-        android:layout_width="286dp"
+        android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginBottom="30dp"
-        android:layout_marginEnd="45dp"
-        android:layout_marginStart="45dp"
-        android:backgroundTint="@color/colorPrimary"
+        android:layout_marginEnd="35dp"
+        android:layout_marginStart="35dp"
+        android:backgroundTint="@color/colorPrimaryDark"
         android:text="Get a Fact"
         android:textSize="18sp"
         android:textStyle="bold"
