@@ -10,41 +10,65 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#a7ffeb"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <RelativeLayout
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar3"
             android:layout_width="match_parent"
-            android:layout_height="56dp"
-            android:background="#1976d2">
+            android:layout_height="90dp"
+            android:layout_weight="1"
+            android:background="?colorPrimary"
+            android:clipToPadding="false"
+            android:elevation="7dp"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-            <ImageButton
-                android:id="@+id/toMainMenuBtn"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentStart="true"
-                android:background="#1976d2"
-                android:paddingLeft="15dp"
-                android:paddingRight="15dp"
-                android:scaleType="centerInside"
-                android:scaleX="2"
-                android:scaleY="2"
-                app:srcCompat="?attr/homeAsUpIndicator" />
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="Top facts"
-                android:textSize="30dp"
-                android:textStyle="bold" />
-        </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+
+                <TextView
+                    android:id="@+id/category"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_centerHorizontal="true"
+                    android:gravity="center_vertical"
+                    android:text="Top Facts"
+                    android:textAlignment="center"
+                    android:textSize="25sp"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/toMainMenuBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentLeft="true"
+                    android:layout_gravity="start"
+                    android:background="@null"
+                    android:paddingLeft="15dp"
+                    android:paddingRight="10dp"
+                    android:scaleX="1.5"
+                    android:scaleY="1.5"
+                    app:srcCompat="?attr/homeAsUpIndicator" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.Toolbar>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 

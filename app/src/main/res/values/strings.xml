@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">FactsApp</string>
     <string name="title_activity_home">HomeActivity</string>
+    <string name="skip"><u>Skip</u></string>
+    <string name="facebook_app_id">391601421310678</string>
+    <string name="fb_login_protocol_scheme">fb391601421310678</string>
 </resources>

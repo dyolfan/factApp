@@ -1,11 +1,19 @@
 package com.colors.student.factsapp;
 
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Base64;
+import android.util.Log;
 import android.view.Window;
 import android.widget.ProgressBar;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class LoadingActivity extends AppCompatActivity {
     private static int SPLASH_TIME_OUT = 2500;
@@ -48,7 +56,7 @@ public class LoadingActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                startActivity(intents.mainMenu);
+                startActivity(intents.login);
                 finish();
             }
         }, SPLASH_TIME_OUT);
@@ -56,4 +64,5 @@ public class LoadingActivity extends AppCompatActivity {
 
 
     }
+
 }
