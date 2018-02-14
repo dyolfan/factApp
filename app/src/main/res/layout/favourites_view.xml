@@ -48,7 +48,7 @@
                     android:textStyle="bold" />
 
                 <ImageButton
-                    android:id="@+id/imageButton"
+                    android:id="@+id/toMainMenu"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_alignParentLeft="true"
@@ -81,78 +81,116 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/fact10"
+                <TextView
+                    android:id="@+id/fact_1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="0dp"
-                    android:text="Start of fact 1..." />
+                    android:layout_marginTop="10dp"
+                    android:background="#ff9800"
+                    android:padding="5dp"
+                    android:text="Start of fact 1 ..."
+                    android:textColor="@android:color/black"
+                    android:textSize="27sp" />
 
-                <Button
-                    android:id="@+id/fact11"
+                <TextView
+                    android:id="@+id/fact_2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Start of fact 2..." />
+                    android:layout_marginTop="10dp"
+                    android:background="#7CB342"
+                    android:padding="5dp"
+                    android:text="Start of fact 7 ..."
+                    android:textColor="@android:color/black"
+                    android:textSize="27sp" />
 
-                <Button
-                    android:id="@+id/fact8"
+                <TextView
+                    android:id="@+id/fact_3"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Start of fact 1..." />
+                    android:layout_marginTop="10dp"
+                    android:background="#009688"
+                    android:padding="5dp"
+                    android:text="Start of fact 5 ..."
+                    android:textColor="@android:color/black"
+                    android:textSize="27sp" />
 
-                <Button
-                    android:id="@+id/fact9"
+                <TextView
+                    android:id="@+id/fact_4"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Start of fact 2..." />
+                    android:layout_marginTop="10dp"
+                    android:background="#9c27b0"
+                    android:padding="5dp"
+                    android:text="Start of fact 3 ..."
+                    android:textColor="@android:color/black"
+                    android:textSize="27sp" />
 
-                <Button
-                    android:id="@+id/fact6"
+                <TextView
+                    android:id="@+id/fact_5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Start of fact 1..." />
+                    android:layout_marginTop="10dp"
+                    android:background="#f44336"
+                    android:padding="5dp"
+                    android:text="Start of fact 2 ..."
+                    android:textColor="@android:color/black"
+                    android:textSize="27sp" />
 
-                <Button
-                    android:id="@+id/fact7"
+                <TextView
+                    android:id="@+id/fact_6"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Start of fact 2..." />
+                    android:layout_marginTop="10dp"
+                    android:background="#43A047"
+                    android:padding="5dp"
+                    android:text="Start of fact 6 ..."
+                    android:textColor="@android:color/black"
+                    android:textSize="27sp" />
 
-                <Button
-                    android:id="@+id/fact4"
+                <TextView
+                    android:id="@+id/fact_7"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Start of fact 1..." />
+                    android:layout_marginTop="10dp"
+                    android:background="#C0CA33"
+                    android:padding="5dp"
+                    android:text="Start of fact 8..."
+                    android:textColor="@android:color/black"
+                    android:textSize="27sp" />
 
-                <Button
-                    android:id="@+id/fact5"
+                <TextView
+                    android:id="@+id/fact_8"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Start of fact 2..." />
+                    android:layout_marginTop="10dp"
+                    android:background="#3f51b5"
+                    android:padding="5dp"
+                    android:text="Start of fact 4 ..."
+                    android:textColor="@android:color/black"
+                    android:textSize="27sp" />
 
-                <Button
-                    android:id="@+id/fact"
+                <TextView
+                    android:id="@+id/fact_9"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Start of fact 1..." />
+                    android:layout_marginTop="10dp"
+                    android:background="#FDD835"
+                    android:padding="5dp"
+                    android:text="Start of fact 9..."
+                    android:textColor="@android:color/black"
+                    android:textSize="27sp" />
 
-                <Button
-                    android:id="@+id/fact3"
+                <TextView
+                    android:id="@+id/fact_10"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Start of fact 2..." />
+                    android:layout_marginTop="10dp"
+                    android:background="#FFB300"
+                    android:padding="5dp"
+                    android:text="Start of fact 10 ..."
+                    android:textColor="@android:color/black"
+                    android:textSize="27sp" />
 
-                <Button
-                    android:id="@+id/fact1"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Start of fact 1..." />
-
-                <Button
-                    android:id="@+id/fact2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Start of fact 2..." />
             </LinearLayout>
         </ScrollView>
 
