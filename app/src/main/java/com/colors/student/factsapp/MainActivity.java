@@ -74,6 +74,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        //Creating local database using built in SQLite
+
 
     }
 }

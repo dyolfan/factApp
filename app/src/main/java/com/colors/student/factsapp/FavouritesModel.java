@@ -1,0 +1,37 @@
+package com.colors.student.factsapp;
+
+/**
+ * Created by Peteris on 18.14.2.
+ */
+
+public class FavouritesModel {
+
+    private int id;
+    int category;
+    String fact;
+
+    public int getID() {
+        return id;
+    }
+
+    public void setID(int ID) {
+        this.id = ID;
+    }
+
+    public int getCategory() {
+        return category;
+    }
+
+    public void setCategory(int category) {
+        this.category = category;
+    }
+
+    public String getFact() {
+        return fact;
+    }
+
+    public void setFact(String fact) {
+        this.fact = fact;
+    }
+
+}
