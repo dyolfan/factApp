@@ -41,7 +41,7 @@ public class TopFacts extends AppCompatActivity {
         setContentView(R.layout.top_facts);
 
         ImageButton toMainMenuBtn = this.findViewById(R.id.toMainMenuBtn);
-        final Intent mainMenu = new Intent(this, MainActivity.class);
+        Intents intents = new Intents(this);
 
 
 
@@ -82,7 +82,7 @@ public class TopFacts extends AppCompatActivity {
         toMainMenuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(mainMenu);
+                startActivity(intents.mainMenu);
             }
         });
     }

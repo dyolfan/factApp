@@ -20,6 +20,7 @@ public class LoadingActivity extends AppCompatActivity {
         setContentView(R.layout.loading_screen);
         loading = findViewById(R.id.progressBar);
 
+        Intents intents = new Intents(this);
 
         new Thread(new Runnable() {
             public void run() {
@@ -47,8 +48,7 @@ public class LoadingActivity extends AppCompatActivity {
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent homeIntent = new Intent(LoadingActivity.this, HomeActivity.class);
-                startActivity(homeIntent);
+                startActivity(intents.mainMenu);
                 finish();
             }
         }, SPLASH_TIME_OUT);
