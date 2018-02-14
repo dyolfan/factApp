@@ -20,10 +20,15 @@ public class MainActivity extends AppCompatActivity {
 
         Intents intents = new Intents(this);
         Button topFactsBtn = this.findViewById(R.id.topfactsBtn);
+        Button favFactsBtn = this.findViewById(R.id.mefavBtn);
+
 
 
         topFactsBtn.setOnClickListener((v) -> {
             startActivity(intents.topFact);
+        });
+        favFactsBtn.setOnClickListener((v)-> {
+            startActivity(intents.favourites);
         });
     }
 }

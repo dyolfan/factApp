@@ -12,12 +12,14 @@ public class Intents extends AppCompatActivity {
     Intent loading;
     Intent topFact;
     Intents rating;
+    Intent favourites;
 
 
     Intents(Context thisContext){
         this.mainMenu = new Intent(thisContext, MainActivity.class);
         this.loading = new Intent(thisContext, LoadingActivity.class);
         this.topFact = new Intent(thisContext, TopFacts.class);
+        this.favourites = new Intent(thisContext, FavouritesActivity.class);
     }
 
 }

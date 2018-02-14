@@ -87,7 +87,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
             android:background="#f44336"
-            android:text="Button"
+            android:text="My favourits"
             android:textColor="@android:color/white"
             android:textSize="30dp"
             tools:text="My favourits" />
