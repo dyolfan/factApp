@@ -2,13 +2,7 @@ package com.colors.student.factsapp;
 
 import android.widget.TextView;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Environment;
-import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -17,36 +11,10 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ShareActionProvider;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.facebook.FacebookSdk;
-import com.facebook.share.model.ShareLinkContent;
 import com.facebook.share.widget.ShareDialog;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import android.content.Context;
-import java.io.IOException;
-import java.util.Date;
-
-import com.colors.student.factsapp.databases.DatabaseAccess;
-import com.colors.student.factsapp.databases.Fact;
 import com.colors.student.factsapp.databases.FactController;
-import com.colors.student.factsapp.databases.FactList;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
+
 
 /**
  * Created by Helena on 14/02/18.
@@ -54,12 +22,6 @@ import java.util.List;
 
 public class FactActivity extends AppCompatActivity {
     private ShareActionProvider mShareActionProvider;
-    ArrayList<String> facts = new ArrayList<>();
-    String input;
-    String factText;
-    String factId;
-    String factRating;
-
     TextView category;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -77,14 +39,16 @@ public class FactActivity extends AppCompatActivity {
         TextView factBox = this.findViewById(R.id.factBox);
 
         Button getFact = findViewById(R.id.getFact);
-
+        FactController fc = new FactController();
+        fc.setList();
 
         getFact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                factBox.setText(fc.factList.getFact(message).getText());
             }
         });
+
         ImageButton toMenu = findViewById(R.id.backBtn);
         ShareDialog shareDialog = new ShareDialog(this);
         LinearLayout thisAction = findViewById(R.id.thisFact);

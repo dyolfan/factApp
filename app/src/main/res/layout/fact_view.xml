@@ -5,7 +5,7 @@
     android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bcg1">
+    tools:background="@android:color/holo_blue_light">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -84,22 +84,30 @@
                 android:layout_weight="1"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/factBox"
+                <ScrollView
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:layout_marginEnd="50dp"
-                    android:layout_marginStart="50dp"
-                    android:layout_marginTop="40dp"
-                    android:layout_weight="1"
-                    android:text="Fact Text //We could try to do that the text size changes depending on the lenght of the fact"
-                    android:textAlignment="center"
-                    android:textSize="34sp"
-                    app:layout_constraintBottom_toTopOf="@+id/favouriteFact"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/factBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginEnd="50dp"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginTop="40dp"
+                        android:layout_weight="1"
+                        android:text="Fact Text //We could try to do that the text size changes depending on the lenght of the fact"
+                        android:textAlignment="center"
+                        android:textSize="34sp"
+                        app:layout_constraintBottom_toTopOf="@+id/favouriteFact"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+                </ScrollView>
+
             </LinearLayout>
 
             <LinearLayout
