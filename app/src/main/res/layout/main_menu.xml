@@ -9,9 +9,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimaryLight"
+        android:layout_marginStart="-5dp"
+        android:background="@drawable/blue_white_bcg"
         android:gravity="center_vertical|center_horizontal"
         android:orientation="vertical"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,50 +21,61 @@
 
         <Button
             android:id="@+id/topfactsBtn"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="#f44336"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:backgroundTint="@color/colorPrimaryDark"
             android:text="Top facts"
             android:textColor="@android:color/white"
             android:textSize="30dp" />
 
         <Button
             android:id="@+id/sportsBtn"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:backgroundTint="#ff9800"
+            android:layout_marginBottom="-13dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#1565C0"
             android:text="Sports"
             android:textColor="@android:color/white"
-            android:textSize="30dp"
-            tools:text="Sports" />
+            android:textSize="30dp" />
 
         <Button
             android:id="@+id/animalsBtn"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#f44336"
+            android:layout_marginBottom="-13dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:backgroundTint="#1976D2"
             android:text="Animals"
             android:textColor="@android:color/white"
-            android:textSize="30dp"
-            tools:text="Animals" />
+            android:textSize="30dp" />
 
         <Button
             android:id="@+id/historyBtn"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#9c27b0"
+            android:layout_marginBottom="-13dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:backgroundTint="#1E88E5"
             android:text="History"
             android:textColor="@android:color/white"
-            android:textSize="30dp"
-            tools:text="History" />
+            android:textSize="30dp" />
 
         <Button
             android:id="@+id/itBtn"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#3f51b5"
+            android:layout_marginBottom="-13dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:backgroundTint="#2196F3"
             android:text="IT"
             android:textColor="@android:color/white"
             android:textSize="30dp"
@@ -70,23 +83,40 @@
 
         <Button
             android:id="@+id/politicsBtn"
-            android:layout_width="300dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#009688"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:backgroundTint="#42A5F5"
             android:text="Politics"
             android:textColor="@android:color/white"
             android:textSize="30dp" />
 
         <Button
-            android:id="@+id/mefavBtn"
-            android:layout_width="300dp"
+            android:id="@+id/myFavBtn"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:backgroundTint="#f44336"
+            android:layout_marginBottom="-13dp"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="20dp"
+            android:backgroundTint="#64B5F6"
             android:text="My favourites"
             android:textColor="@android:color/white"
             android:textSize="30dp"
             tools:text="My favourites" />
+
+        <Button
+            android:id="@+id/addFactBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="0dp"
+            android:backgroundTint="#90CAF9"
+            android:text="Add new fact"
+            android:textColor="@android:color/white"
+            android:textSize="30dp" />
 
         android:text="Button" />
     </LinearLayout>

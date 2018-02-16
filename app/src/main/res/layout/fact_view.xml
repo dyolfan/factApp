@@ -2,9 +2,10 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#E0F2F1">
+    android:background="@drawable/bcg1">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="11"
-            android:background="?colorPrimary"
+            android:background="?colorPrimaryDark"
             android:clipToPadding="false"
             android:elevation="7dp"
             app:contentInsetLeft="0dp"
@@ -51,6 +52,7 @@
                     android:layout_centerHorizontal="true"
                     android:gravity="center_vertical"
                     android:textAlignment="center"
+                    android:textColor="@color/cardview_light_background"
                     android:textSize="28sp"
                     android:textStyle="bold" />
 
@@ -76,6 +78,7 @@
             android:orientation="vertical">
 
             <LinearLayout
+                android:id="@+id/thisFact"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -112,11 +115,10 @@
                     <ImageButton
                         android:id="@+id/favouriteFact"
                         android:layout_width="wrap_content"
-                        android:layout_height="56dp"
-                        android:layout_marginBottom="10dp"
+                        android:layout_height="wrap_content"
                         android:background="@null"
-                        android:scaleX="2.3"
-                        android:scaleY="2.3"
+                        android:scaleX="1.5"
+                        android:scaleY="1.5"
                         app:layout_constraintBottom_toTopOf="@+id/getFact"
                         app:layout_constraintEnd_toStartOf="@+id/voteDownBtn"
                         app:layout_constraintStart_toEndOf="@+id/voteUpBtn"
@@ -132,6 +134,7 @@
                         android:backgroundTint="@color/colorPrimaryDark"
                         android:text="Vote -"
                         android:textSize="16sp"
+                        android:visibility="visible"
                         app:layout_constraintBottom_toTopOf="@+id/getFact"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/favouriteFact" />
@@ -143,7 +146,7 @@
                         android:layout_marginBottom="30dp"
                         android:layout_marginEnd="35dp"
                         android:layout_marginStart="35dp"
-                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:backgroundTint="@color/white"
                         android:text="Get a Fact"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -161,6 +164,7 @@
                         android:backgroundTint="@color/colorPrimaryDark"
                         android:text="Vote +"
                         android:textSize="16sp"
+                        android:visibility="visible"
                         app:layout_constraintBottom_toTopOf="@+id/getFact"
                         app:layout_constraintEnd_toStartOf="@+id/favouriteFact"
                         app:layout_constraintStart_toStartOf="parent" />
