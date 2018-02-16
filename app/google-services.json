@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "227292106214",
+    "firebase_url": "https://factapp-6de6a.firebaseio.com",
+    "project_id": "factapp-6de6a",
+    "storage_bucket": "factapp-6de6a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227292106214:android:6627a475fe32ebb5",
+        "android_client_info": {
+          "package_name": "com.colors.student.factsapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "227292106214-eapbpqok1cm07jgdudfn9h0t2mbcnkm1.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.colors.student.factsapp",
+            "certificate_hash": "07f09d7f82e8b9ed764f8fcd64601ff5c3f7ca9d"
+          }
+        },
+        {
+          "client_id": "227292106214-n09olb2b3f5bi78132k7kvm16liqo2q4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDZQb5gX3s61zbEkYemVX3CgEHqRu3I_LU"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "227292106214-n09olb2b3f5bi78132k7kvm16liqo2q4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
