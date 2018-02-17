@@ -10,7 +10,9 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="-5dp"
-        android:background="@drawable/blue_white_bcg"
+        android:background="@drawable/bcg_4"
+        android:backgroundTint="@color/colorPrimaryLight"
+        android:backgroundTintMode="@color/colorPrimaryLight"
         android:gravity="center_vertical|center_horizontal"
         android:orientation="vertical"
         android:scaleType="centerCrop"
@@ -21,103 +23,110 @@
 
         <Button
             android:id="@+id/topfactsBtn"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="40dp"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="10dp"
-            android:backgroundTint="@color/colorPrimaryDark"
+            android:layout_marginTop="20dp"
+            android:background="@color/colorPrimaryDark"
+            android:elevation="6dp"
             android:text="Top facts"
             android:textColor="@android:color/white"
-            android:textSize="30dp" />
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/sportsBtn"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="-13dp"
             android:layout_marginEnd="40dp"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="#1565C0"
+            android:layout_marginTop="40dp"
+            android:background="#C81565C0"
+            android:elevation="6dp"
             android:text="Sports"
             android:textColor="@android:color/white"
-            android:textSize="30dp" />
+            android:textSize="26sp" />
 
         <Button
             android:id="@+id/animalsBtn"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="-13dp"
             android:layout_marginEnd="40dp"
             android:layout_marginStart="40dp"
-            android:backgroundTint="#1976D2"
+            android:background="#C81976D2"
+            android:elevation="6dp"
             android:text="Animals"
             android:textColor="@android:color/white"
-            android:textSize="30dp" />
+            android:textSize="26sp" />
 
         <Button
             android:id="@+id/historyBtn"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="-13dp"
             android:layout_marginEnd="40dp"
             android:layout_marginStart="40dp"
-            android:backgroundTint="#1E88E5"
+            android:background="#C81E88E5"
+            android:elevation="6dp"
             android:text="History"
             android:textColor="@android:color/white"
-            android:textSize="30dp" />
+            android:textSize="26sp" />
 
         <Button
             android:id="@+id/itBtn"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="-13dp"
             android:layout_marginEnd="40dp"
             android:layout_marginStart="40dp"
-            android:backgroundTint="#2196F3"
+            android:background="#C82196F3"
+            android:elevation="6dp"
             android:text="IT"
             android:textColor="@android:color/white"
-            android:textSize="30dp"
-            tools:text="IT" />
+            android:textSize="26sp" />
 
         <Button
             android:id="@+id/politicsBtn"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="40dp"
             android:layout_marginStart="40dp"
-            android:backgroundTint="#42A5F5"
+            android:background="#C842A5F5"
+            android:elevation="6dp"
             android:text="Politics"
             android:textColor="@android:color/white"
-            android:textSize="30dp" />
+            android:textSize="26sp" />
 
         <Button
             android:id="@+id/myFavBtn"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="-13dp"
             android:layout_marginEnd="40dp"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="20dp"
-            android:backgroundTint="#64B5F6"
+            android:layout_marginTop="40dp"
+            android:background="#64B5F6"
+            android:elevation="6dp"
             android:text="My favourites"
             android:textColor="@android:color/white"
-            android:textSize="30dp"
-            tools:text="My favourites" />
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/addFactBtn"
+            style="?android:attr/borderlessButtonStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="40dp"
             android:layout_marginStart="40dp"
             android:layout_marginTop="0dp"
-            android:backgroundTint="#90CAF9"
+            android:background="#90CAF9"
+            android:elevation="6dp"
             android:text="Add new fact"
             android:textColor="@android:color/white"
-            android:textSize="30dp" />
-
-        android:text="Button" />
+            android:textSize="30sp" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>
