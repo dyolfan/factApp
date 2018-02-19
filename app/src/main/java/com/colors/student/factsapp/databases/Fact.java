@@ -1,27 +1,42 @@
 package com.colors.student.factsapp.databases;
 
+import android.support.annotation.NonNull;
+
 /**
  * Created by kirils on 14.02.18.
  */
 
-public class Fact {
+public class Fact implements Comparable<Fact>{
     public int id;
-    public String txt;
+    public String text;
     public String shortText;
     public int rating;
+    public boolean oppened = false;
 
     public Fact(int id, String txt, int rating){
         this.id = id;
-        this.txt = txt;
+        this.text = txt;
         this.rating = rating;
-        this.shortText = getShortText(txt);
+        this.shortText = getShortText();
     }
 
     public String getText(){
-        return this.txt;
+        return this.text;
     }
 
-    public String getShortText(String text) {
-       return shortText = text.substring(0, 5);
+    public String getShortText() {
+        if (text.length()<15)
+            return text;
+       return  text.substring(0, 14)+ "... ";
+    }
+
+
+    @Override
+    public int compareTo(@NonNull Fact o) {
+        if (this.rating < o.rating)
+            return -1;
+        if (this.rating > o.rating)
+            return 1;
+        else return 0;
     }
 }
