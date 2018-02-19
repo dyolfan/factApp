@@ -39,9 +39,6 @@ public class FactActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        if (shouldAskPermissions()) {
-            askPermissions();
-        }
         Context context = this.getApplicationContext();
         setContentView(R.layout.fact_view);
         Intents intents = new Intents(this);

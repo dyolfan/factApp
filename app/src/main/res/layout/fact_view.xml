@@ -2,7 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mainLayout"
+    android:id="@+id/factView"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -16,7 +16,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="11"
-            android:background="@color/colorPrimaryLight"
             android:clipToPadding="false"
             app:contentInsetLeft="0dp"
             app:contentInsetStart="0dp"
@@ -50,6 +49,7 @@
                     android:layout_centerHorizontal="true"
                     android:gravity="center_vertical"
                     android:textAlignment="center"
+                    android:textColor="@color/colorAccent"
                     android:textSize="28sp"
                     android:textStyle="bold" />
 
@@ -70,7 +70,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:background="@drawable/fact_bcg_draw"
+            android:background="@drawable/fact_bcg1"
             android:orientation="vertical">
 
             <LinearLayout
@@ -93,8 +93,8 @@
                         android:layout_marginEnd="50dp"
                         android:layout_marginStart="50dp"
                         android:layout_marginTop="40dp"
-                        android:layout_weight="1"
-                        android:text="Fact Text //We could try to do that the text size changes depending on the lenght of the fact"
+
+                        android:text="Fact Text "
                         android:textAlignment="center"
                         android:textSize="34sp"
                         app:layout_constraintBottom_toTopOf="@+id/favouriteFact"
@@ -121,6 +121,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:background="@null"
+                        android:paddingBottom="12dp"
                         android:scaleX="1.5"
                         android:scaleY="1.5"
                         app:layout_constraintBottom_toTopOf="@+id/getFact"
@@ -135,7 +136,8 @@
                         android:layout_marginBottom="5dp"
                         android:layout_marginEnd="35dp"
                         android:layout_marginStart="20dp"
-                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:backgroundTint="@color/colorAccent"
+                        android:elevation="3dp"
                         android:text="Vote -"
                         android:textSize="16sp"
                         android:visibility="visible"
@@ -151,6 +153,7 @@
                         android:layout_marginEnd="35dp"
                         android:layout_marginStart="35dp"
                         android:backgroundTint="@color/white"
+                        android:elevation="5dp"
                         android:text="Get a Fact"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -165,7 +168,8 @@
                         android:layout_marginBottom="5dp"
                         android:layout_marginEnd="20dp"
                         android:layout_marginStart="35dp"
-                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:backgroundTint="@color/colorAccent"
+                        android:elevation="3dp"
                         android:text="Vote +"
                         android:textSize="16sp"
                         android:visibility="visible"
