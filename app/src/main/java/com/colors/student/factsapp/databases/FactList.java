@@ -9,6 +9,7 @@ import java.util.Random;
  */
 
 public class FactList {
+    // TODO: get facts from base;
     public List<Fact> sports;
     public List<Fact> animals;
     public List<Fact> politics;
@@ -49,8 +50,7 @@ public class FactList {
     public Fact getFact(String category) {
 
         Random rand = new Random();
-
-        int  randn = rand.nextInt(19);
+        int randn = rand.nextInt(19);
         switch (category) {
             case "Sports":
                 return sports.get(randn);
@@ -59,8 +59,10 @@ public class FactList {
             case "Politics":
                 return politics.get(randn);
             case "History":
+
                 return history.get(randn);
             case "IT":
+                randn = rand.nextInt(31);
                 return it.get(randn);
         }
         return null;

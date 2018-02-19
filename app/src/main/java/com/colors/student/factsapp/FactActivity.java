@@ -41,6 +41,7 @@ public class FactActivity extends AppCompatActivity {
         Button getFact = findViewById(R.id.getFact);
         FactController fc = new FactController();
         fc.setList();
+        factBox.setText(fc.factList.getFact(message).getText());
 
         getFact.setOnClickListener(new View.OnClickListener() {
             @Override
