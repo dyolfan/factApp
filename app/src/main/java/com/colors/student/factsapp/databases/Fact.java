@@ -2,16 +2,24 @@ package com.colors.student.factsapp.databases;
 
 import android.support.annotation.NonNull;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 /**
  * Created by kirils on 14.02.18.
  */
 
 public class Fact implements Comparable<Fact>{
+
+
+
     public int id;
     public String text;
     public String shortText;
     public int rating;
     public boolean oppened = false;
+
+
 
     public Fact(int id, String txt, int rating){
         this.id = id;

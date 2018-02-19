@@ -1,5 +1,11 @@
 package com.colors.student.factsapp.databases;
 
+import android.os.Bundle;
+import android.util.Log;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -12,6 +18,10 @@ import java.util.TreeSet;
  */
 
 public class FactList {
+
+
+    // Write a message to the database
+
     // TODO: get facts from base;
     public List<Fact> sports;
     public List<Fact> animals;
@@ -29,6 +39,8 @@ public class FactList {
         this.history = new LinkedList<>();
         this.it = new LinkedList<>();
     }
+
+
 
     public void addFact(String category, Fact fact) {
         randomRating();

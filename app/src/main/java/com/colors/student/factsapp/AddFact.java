@@ -34,6 +34,7 @@ public class AddFact extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+
             }
         });
         toMenu.setOnClickListener(new View.OnClickListener() {

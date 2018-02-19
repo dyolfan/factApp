@@ -23,12 +23,15 @@ import android.widget.ShareActionProvider;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.widget.ShareDialog;
 import com.colors.student.factsapp.databases.FactController;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 
 /**
@@ -62,14 +65,20 @@ public class FactActivity extends AppCompatActivity {
 
         FactController fc = new FactController();
         fc.setList();
-        factBox.setText(fc.factList.getFact(message).getText());
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("History");
+        myRef.setValue(fc.factList.history);
 
-        getFact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                factBox.setText(fc.factList.getFact(message).getText());
-            }
-        });
+
+
+//        factBox.setText(fc.factList.getFact(message).getText());
+//
+//        getFact.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                factBox.setText(fc.factList.getFact(message).getText());
+//            }
+//        });
 
 
         toMenu.setOnClickListener(view -> {
