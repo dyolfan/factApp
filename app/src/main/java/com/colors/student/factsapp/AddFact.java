@@ -46,7 +46,6 @@ public class AddFact extends AppCompatActivity {
                 Log.i("FACT", newFact);
                 Log.i("CATEGORY", selectedCat);
                 facts.userAddFact(newFact, selectedCat);
-
                 startActivity(intents.mainMenu);
             }
         });
