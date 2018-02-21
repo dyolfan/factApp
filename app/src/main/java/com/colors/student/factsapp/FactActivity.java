@@ -55,15 +55,10 @@ DatabaseReference mDatabase;
     FactList list = new FactList();
 
 
-
-RequiresApi(api = Build.VERSION_CODES.M)
     TextView category;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        if (shouldAskPermissions()) {
-            askPermissions();
-        }
 
         Context context = this.getApplicationContext();
         setContentView(R.layout.fact_view);
@@ -76,17 +71,14 @@ RequiresApi(api = Build.VERSION_CODES.M)
         ImageButton toMenu = findViewById(R.id.backBtn);
         TextView factBox = this.findViewById(R.id.factBox);
         LinearLayout thisView = findViewById(R.id.thisFact);//this view i want to make a image of
-
-        Intent intent = getIntent();
         String message = intent.getExtras().getString("category");
         category.setText(message);
-        ImageButton share = findViewById(R.id.shareBtn);
 
         //Favourite/SQLite related variables
         ImageButton favourite = findViewById(R.id.favouriteFact);
         TextView factToBeFavourited = findViewById(R.id.factBox);
 
- mDatabase = FirebaseDatabase.getInstance("https://factsapp-19a2f.firebaseio.com/").getReference().child(message);
+        mDatabase = FirebaseDatabase.getInstance("https://factsapp-19a2f.firebaseio.com/").getReference().child(message);
         list = new FactList();
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
@@ -131,19 +123,6 @@ RequiresApi(api = Build.VERSION_CODES.M)
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
-        });
-
-        share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent myIntent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                String shareText = "Your Body here";
-                String shareSub = "Subtitle";
-                myIntent.putExtra(Intent.EXTRA_TEXT, shareText);
-                myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
-                startActivity(Intent.createChooser(myIntent, "Share using"));
-                startActivity(intents.mainMenu);
         });
 
         favourite.setOnClickListener(new View.OnClickListener() {
