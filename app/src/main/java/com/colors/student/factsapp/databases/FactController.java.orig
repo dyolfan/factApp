@@ -10,7 +10,11 @@ import java.sql.SQLException;
 
 public class FactController{
     public FactList factList = new FactList();
-
+<<<<<<< HEAD
+    int rating = 0;
+    public void setList() {}
+=======
+>>>>>>> 27d0826aee2b5a85354a25601379a8d9140113b5
 
 }
 

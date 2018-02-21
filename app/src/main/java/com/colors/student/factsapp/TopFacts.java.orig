@@ -11,7 +11,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.colors.student.factsapp.databases.Fact;
-import com.colors.student.factsapp.databases.FactController;
 import com.colors.student.factsapp.databases.FactList;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -181,6 +180,10 @@ public class TopFacts extends AppCompatActivity {
                 startActivity(intents.mainMenu);
             }
         });
+
+
+
+
     }
 
     private void changeTop(String category) {
@@ -236,4 +239,53 @@ public class TopFacts extends AppCompatActivity {
             }
         });
     }
+<<<<<<< HEAD
+
+    private void loadData(String category) {
+        dRef = FirebaseDatabase.getInstance("https://factsapp-19a2f.firebaseio.com/").getReference().child(category);
+        Log.i("Connection: ", "connected");
+        list = new FactList();
+        dRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                for (DataSnapshot uniqueKeySnapshot : dataSnapshot.getChildren()) {
+                    String key = uniqueKeySnapshot.getKey();
+                    String text = uniqueKeySnapshot.child("text").getValue().toString();
+                    int rating = Integer.parseInt(uniqueKeySnapshot.child("rating").getValue().toString());
+                    Fact newFact = new Fact(text, rating, key);
+                    Log.i("tag: ", newFact.toString());
+                    switch (category) {
+                        case "Sports":
+                            list.sports.add(newFact);
+                            break;
+                        case "Animals":
+                            list.animals.add(newFact);
+                            break;
+                        case "Politics":
+                            list.politics.add(newFact);
+                            break;
+                        case "History":
+                            list.history.add(newFact);
+                            break;
+                        case "IT":
+                            list.it.add(newFact);
+                            break;
+                    }
+                    Log.i("tag: ", "Loading...");
+                }
+                Log.i("Loading: ", "Done!");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
+    }
+=======
+>>>>>>> 27d0826aee2b5a85354a25601379a8d9140113b5
 }
