@@ -59,7 +59,7 @@ public class TopFacts extends AppCompatActivity {
         r10 = (TextView) this.findViewById(R.id.fact_r10);
         TextView[] rs1 = {r1,r2,r3,r4,r5,r6,r7,r8,r9,r10};
         rs = rs1;
-        fc.setList();
+//        fc.setList();
 
         fc.factList.sortTopFacts("Sports");
 

@@ -20,18 +20,24 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ShareActionProvider;
 
+import com.colors.student.factsapp.databases.Fact;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.widget.ShareDialog;
 import com.colors.student.factsapp.databases.FactController;
+import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 
 
 /**
@@ -62,13 +68,12 @@ public class FactActivity extends AppCompatActivity {
 
         String message = intent.getExtras().getString("category");
         category.setText(message);
-
-        FactController fc = new FactController();
-        fc.setList();
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("History");
-        myRef.setValue(fc.factList.history);
-
+//
+//        FactController fc = new FactController();
+//        fc.setList();
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference myRef = database.getReference("Animals");
+//        myRef.setValue(fc.factList.history);
 
 
 //        factBox.setText(fc.factList.getFact(message).getText());
