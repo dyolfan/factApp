@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ShareActionProvider;
+import android.widget.TextView;
 
 import com.colors.student.factsapp.databases.Fact;
 import com.colors.student.factsapp.databases.FactList;
@@ -40,6 +41,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import static com.colors.student.factsapp.MainActivity.sQLiteHelper;
 import static android.content.ContentValues.TAG;
 
 
@@ -48,16 +50,15 @@ import static android.content.ContentValues.TAG;
  */
 
 public class FactActivity extends AppCompatActivity {
-    DatabaseReference mDatabase;
+    private ShareActionProvider mShareActionProvider;
+DatabaseReference mDatabase;
     FactList list = new FactList();
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+
+    TextView category;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        if (shouldAskPermissions()) {
-            askPermissions();
-        }
 
         Context context = this.getApplicationContext();
         setContentView(R.layout.fact_view);
@@ -70,9 +71,12 @@ public class FactActivity extends AppCompatActivity {
         ImageButton toMenu = findViewById(R.id.backBtn);
         TextView factBox = this.findViewById(R.id.factBox);
         LinearLayout thisView = findViewById(R.id.thisFact);//this view i want to make a image of
-
         String message = intent.getExtras().getString("category");
         category.setText(message);
+
+        //Favourite/SQLite related variables
+        ImageButton favourite = findViewById(R.id.favouriteFact);
+        TextView factToBeFavourited = findViewById(R.id.factBox);
 
         mDatabase = FirebaseDatabase.getInstance("https://factsapp-19a2f.firebaseio.com/").getReference().child(message);
         list = new FactList();
@@ -121,18 +125,21 @@ public class FactActivity extends AppCompatActivity {
             }
         });
 
+        favourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-        toMenu.setOnClickListener(view -> {
-                Intent myIntent = new Intent(Intent.ACTION_SEND);
-                intent.setType("text/plain");
-                String shareText = "Your Body here";
-                String shareSub = "Subtitle";
-                myIntent.putExtra(Intent.EXTRA_TEXT, shareText);
-                myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
-                startActivity(Intent.createChooser(myIntent, "Share using"));
-                startActivity(intents.mainMenu);
+               //sQLiteHelper.remakeTable();
+                String factString = factToBeFavourited.getText().toString();
+               FavouritesModel contact = new FavouritesModel(factString);
+               sQLiteHelper.insertRecord(contact);
+                //FavouritesModel delpls = new FavouritesModel(factToBeFavourited.getText().toString());
+                //sQLiteHelper.deleteRecord(delpls);
+            }
         });
 
+
+       
 
         share.setOnClickListener(view -> {
                 thisView.setDrawingCacheEnabled(true);
@@ -159,7 +166,22 @@ public class FactActivity extends AppCompatActivity {
                     startActivity(Intent.createChooser(shareIntent, "Choose an app"));
                 }
         });
+
+        toMenu.setOnClickListener(view -> {
+            Intent myIntent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            String shareText = "Your Body here";
+            String shareSub = "Subtitle";
+            myIntent.putExtra(Intent.EXTRA_TEXT, shareText);
+            myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
+            startActivity(Intent.createChooser(myIntent, "Share using"));
+            startActivity(intents.mainMenu);
+        });
+
+
     }
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     protected void askPermissions() {

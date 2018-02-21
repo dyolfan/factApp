@@ -58,11 +58,15 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
+       // Button getFact = this.findViewById(R.id.getFact);
+
         topFactsBtn.setOnClickListener((v) -> {
             startActivity(intents.topFact);
         });
         favFactsBtn.setOnClickListener((v)-> {
             startActivity(intents.favourites);
+
         });
         addNewFact.setOnClickListener((v)->{
             startActivity(intents.newFact);
@@ -98,5 +102,16 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("category", buttonText);
             startActivity(intent);
         });
+<<<<<<< HEAD
+=======
+
+
+
+
+
+>>>>>>> PeterisBranch
     }
+
+
+
 }
