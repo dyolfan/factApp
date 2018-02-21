@@ -166,7 +166,22 @@ DatabaseReference mDatabase;
                     startActivity(Intent.createChooser(shareIntent, "Choose an app"));
                 }
         });
+
+        toMenu.setOnClickListener(view -> {
+            Intent myIntent = new Intent(Intent.ACTION_SEND);
+            intent.setType("text/plain");
+            String shareText = "Your Body here";
+            String shareSub = "Subtitle";
+            myIntent.putExtra(Intent.EXTRA_TEXT, shareText);
+            myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
+            startActivity(Intent.createChooser(myIntent, "Share using"));
+            startActivity(intents.mainMenu);
+        });
+
+
     }
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     protected void askPermissions() {

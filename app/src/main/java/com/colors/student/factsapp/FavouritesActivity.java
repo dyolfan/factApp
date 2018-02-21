@@ -43,7 +43,7 @@ public class FavouritesActivity extends AppCompatActivity {
         TextView fact = findViewById(R.id.factBox);
         ImageButton favourite = findViewById(R.id.favouriteFact);
         TextView favfact = findViewById(R.id.fact_1);
-
+// Models list \/
         List<FavouritesModel> arrayList = sQLiteHelper.getAllRecords();
         String fullFact = ""+ arrayList.get(0).getFact();
         String shortfact = fullFact;
