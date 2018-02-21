@@ -21,18 +21,12 @@ import android.widget.LinearLayout;
 import android.widget.ShareActionProvider;
 
 import com.colors.student.factsapp.databases.Fact;
-<<<<<<< HEAD
 import com.colors.student.factsapp.databases.FactList;
-=======
->>>>>>> eb8c1d72d10f910789b050d819b032e3732756af
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.widget.ShareDialog;
 import com.colors.student.factsapp.databases.FactController;
 import com.google.firebase.database.DataSnapshot;
-<<<<<<< HEAD
 import com.google.firebase.database.DatabaseError;
-=======
->>>>>>> eb8c1d72d10f910789b050d819b032e3732756af
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -42,16 +36,17 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-<<<<<<< HEAD
-import java.util.List;
-
-import static android.content.ContentValues.TAG;
-=======
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
->>>>>>> eb8c1d72d10f910789b050d819b032e3732756af
+
+import static android.content.ContentValues.TAG;
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.colors.student.factsapp.MainActivity.sQLiteHelper;
 
 
 /**
@@ -59,10 +54,17 @@ import java.util.Map;
  */
 
 public class FactActivity extends AppCompatActivity {
-    FactList list;
     DatabaseReference mDatabase;
+    FactList list = new FactList();
 
+<<<<<<< HEAD
     @RequiresApi(api = Build.VERSION_CODES.M)
+=======
+
+
+
+    TextView category;
+>>>>>>> PeterisBranch
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -84,8 +86,8 @@ public class FactActivity extends AppCompatActivity {
 
         String message = intent.getExtras().getString("category");
         category.setText(message);
-<<<<<<< HEAD
 
+<<<<<<< HEAD
         mDatabase = FirebaseDatabase.getInstance("https://factsapp-19a2f.firebaseio.com/").getReference().child(message);
         list = new FactList();
         mDatabase.addValueEventListener(new ValueEventListener() {
@@ -126,30 +128,20 @@ public class FactActivity extends AppCompatActivity {
                 });
 
             }
+=======
+        //Favourite/SQLite related variables
+        ImageButton favourite = findViewById(R.id.favouriteFact);
+        TextView factToBeFavourited = findViewById(R.id.factBox);
+
+
+        share.setOnClickListener(new View.OnClickListener() {
+>>>>>>> PeterisBranch
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-=======
-//
-//        FactController fc = new FactController();
-//        fc.setList();
-//        FirebaseDatabase database = FirebaseDatabase.getInstance();
-//        DatabaseReference myRef = database.getReference("Animals");
-//        myRef.setValue(fc.factList.history);
-
-
-//        factBox.setText(fc.factList.getFact(message).getText());
-//
-//        getFact.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                factBox.setText(fc.factList.getFact(message).getText());
-//            }
-//        });
->>>>>>> eb8c1d72d10f910789b050d819b032e3732756af
 
 
         toMenu.setOnClickListener(view -> {
@@ -191,6 +183,7 @@ public class FactActivity extends AppCompatActivity {
         });
     }
 
+<<<<<<< HEAD
     @RequiresApi(api = Build.VERSION_CODES.M)
     protected void askPermissions() {
         String[] permissions = {
@@ -202,6 +195,21 @@ public class FactActivity extends AppCompatActivity {
     }
     protected boolean shouldAskPermissions() {
         return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
+=======
+        favourite.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               //sQLiteHelper.remakeTable();
+                String factString = factToBeFavourited.getText().toString();
+               FavouritesModel contact = new FavouritesModel(factString);
+               sQLiteHelper.insertRecord(contact);
+                //FavouritesModel delpls = new FavouritesModel(factToBeFavourited.getText().toString());
+                //sQLiteHelper.deleteRecord(delpls);
+            }
+        });
+
+>>>>>>> PeterisBranch
     }
 
 
