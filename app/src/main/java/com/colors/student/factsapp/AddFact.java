@@ -3,6 +3,7 @@ package com.colors.student.factsapp;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -44,7 +45,7 @@ public class AddFact extends AppCompatActivity {
                 String selectedCat = mySpinner.getSelectedItem().toString();
                 Log.i("FACT", newFact);
                 Log.i("CATEGORY", selectedCat);
-                facts.userAddFact(newFact, selectedCat);
+             //   facts.userAddFact(newFact, selectedCat);
 
                 startActivity(intents.mainMenu);
             }

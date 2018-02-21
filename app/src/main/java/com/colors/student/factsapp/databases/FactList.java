@@ -35,7 +35,6 @@ public class FactList {
     public List<Fact> it;
     public TreeSet<Fact> top = new TreeSet<>();
     int rating;
-    boolean sorted = false;
     int previousRandom = 0;
 
     public FactList() {
@@ -104,7 +103,6 @@ public class FactList {
 
     public void sortTopFacts(String category) {
         List<Fact> topTen = new LinkedList<>();
-        if(!sorted) {
             Collections.sort(sports);
             Collections.reverse(sports);
             Collections.sort(animals);
@@ -115,7 +113,6 @@ public class FactList {
             Collections.reverse(history);
             Collections.sort(it);
             Collections.reverse(it);
-        }
         switch (category) {
             case "Sports":
                 for(int i=0; i<10; i++)
@@ -131,11 +128,11 @@ public class FactList {
                 break;
             case "History":
                 for(int i=0; i<10; i++)
-                    topTen.add(politics.get(i));
+                    topTen.add(history.get(i));
                 break;
             case "IT":
                 for(int i=0; i<10; i++)
-                    topTen.add(politics.get(i));
+                    topTen.add(it.get(i));
                 break;
         }
     }

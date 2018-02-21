@@ -48,6 +48,8 @@ import static android.content.ContentValues.TAG;
  */
 
 public class FactActivity extends AppCompatActivity {
+    DatabaseReference mDatabase;
+    FactList list = new FactList();
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     protected void onCreate(Bundle savedInstanceState) {

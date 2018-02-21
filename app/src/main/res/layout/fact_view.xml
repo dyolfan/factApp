@@ -94,7 +94,7 @@
                         android:layout_marginStart="50dp"
                         android:layout_marginTop="40dp"
 
-                        android:text="Fact Text "
+                        android:text="Loading..."
                         android:textAlignment="center"
                         android:textColor="@color/colorAccent"
                         android:textSize="34sp"
