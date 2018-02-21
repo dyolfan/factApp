@@ -36,6 +36,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 
 import static android.content.ContentValues.TAG;
@@ -46,8 +48,6 @@ import static android.content.ContentValues.TAG;
  */
 
 public class FactActivity extends AppCompatActivity {
-    FactList list;
-    DatabaseReference mDatabase;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     protected void onCreate(Bundle savedInstanceState) {

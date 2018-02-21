@@ -3,6 +3,7 @@ package com.colors.student.factsapp;
 import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -38,6 +39,9 @@ public class AddFact extends AppCompatActivity {
         submitFact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+<<<<<<< HEAD
+//TODO: ADD A FACT
+=======
                 FactList facts = new FactList();
                 TextInputEditText fact = findViewById(R.id.newFactText);
                 String newFact = fact.getText().toString();
@@ -47,6 +51,7 @@ public class AddFact extends AppCompatActivity {
                 facts.userAddFact(newFact, selectedCat);
 
                 startActivity(intents.mainMenu);
+>>>>>>> eb8c1d72d10f910789b050d819b032e3732756af
             }
         });
         toMenu.setOnClickListener(new View.OnClickListener() {

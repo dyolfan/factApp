@@ -1,5 +1,6 @@
 package com.colors.student.factsapp.databases;
 
+<<<<<<< HEAD
 import android.renderscript.Sampler;
 import android.util.Log;
 
@@ -11,6 +12,14 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.security.Key;
 import java.util.ArrayList;
+=======
+import android.os.Bundle;
+import android.util.Log;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+>>>>>>> eb8c1d72d10f910789b050d819b032e3732756af
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -27,6 +36,11 @@ import static android.content.ContentValues.TAG;
  */
 
 public class FactList {
+
+
+
+    // Write a message to the database
+
     // TODO: get facts from base;
     public List<Fact> sports;
     public List<Fact> animals;
@@ -45,29 +59,85 @@ public class FactList {
         this.history = new LinkedList<>();
         this.it = new LinkedList<>();
     }
+//    public void loadFacts(String category) {
+//        switch (category) {
+//            case "Sports":
+//                // Code witch gets data
+////            sports.addAll();
+//                break;
+//            case "Animals":
+//                // Code witch gets data
+////        animals.addAll();
+//                break;
+//            case "Politics":
+//                // Code witch gets data
+////         politics.addAll();
+//                break;
+//            case "History":
+//                // Code witch gets data
+////        history.addAll();
+//                break;
+//            case "IT":
+//                // Code witch gets data
+////        it.add(fact);
+//                break;
+//        }
+//    }
 
-    public void addFact(String category, Fact fact) {
-        randomRating();
-        fact.rating= rating;
-                switch (category) {
-            case "Sports":
-                sports.add(fact);
-                break;
-            case "Animals":
-                animals.add(fact);
-                break;
-            case "Politics":
-                politics.add(fact);
-                break;
-            case "History":
-                history.add(fact);
-                break;
-            case "IT":
-                it.add(fact);
-                break;
-        }
+    public void userAddFact(String factText, String category){
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
+        Fact newFact = new Fact(factText, 0);
+        dbRef.child(category).push().setValue(newFact);
     }
 
+<<<<<<< HEAD
+=======
+
+    public Fact getFact(String category) {
+>>>>>>> eb8c1d72d10f910789b050d819b032e3732756af
+
+
+//    public void setCategory(String text) {
+//        DatabaseReference mDatabase = FirebaseDatabase.getInstance("https://factsapp-19a2f.firebaseio.com/").getReference().child(text);
+//        mDatabase.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                // This method is called once with the initial value and again
+//                // whenever data at this location is updated.
+//                for (DataSnapshot uniqueKeySnapshot : dataSnapshot.getChildren()){
+//                    String text = uniqueKeySnapshot.child("text").getValue().toString();
+//                    int rating = Integer.parseInt(uniqueKeySnapshot.child("rating").getValue().toString());
+//                    Log.i("tag: ", text);
+//                    Log.i("tag: ", Integer.toString(rating));
+//
+//                    Fact newFact = new Fact(text, rating);
+//                    switch (text) {
+//                        case "Sports":
+//                            sports.add(newFact);
+//                            break;
+//                        case "Animals":
+//                            animals.add(newFact);
+//                            break;
+//                        case "Politics":
+//                            politics.add(newFact);
+//                            break;
+//                        case "History":
+//                            history.add(newFact);
+//                            break;
+//                        case "IT":
+//                            history.add(newFact);
+//                            break;
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//                // Failed to read value
+//                Log.w(TAG, "Failed to read value.", error.toException());
+//            }
+//        });
+//    }
 
     public Fact getFact(String category) {
         Random rand = new Random();
@@ -146,101 +216,6 @@ public class FactList {
         rating = (int)(Math.random() * range) - 50;
     }
 
-//    public void write(String category, Fact fact) throws IOException {
-//        List<Fact> writeList = null;
-//        String fileName = "";
-//        switch (category) {
-//            case "Sports":
-//                sports.add(fact);
-//                writeList = sports;
-//                fileName = "sports.txt";
-//                break;
-//            case "Animals":
-//                animals.add(fact);
-//                writeList = animals;
-//                fileName = "/animals.dat";
-//                break;
-//            case "Politics":
-//                politics.add(fact);
-//                writeList = politics;
-//                fileName = "/politics.dat";
-//                break;
-//            case "History":
-//                history.add(fact);
-//                writeList = history;
-//                fileName = "/history.dat";
-//                break;
-//            case "IT":
-//                it.add(fact);
-//                writeList = it;
-//                fileName = "/it.dat";
-//                break;
-//        }
-//
-//
-//        FileOutputStream f = new FileOutputStream(new File("sdcard/" + fileName));
-//        ObjectOutputStream o = new ObjectOutputStream(f);
-//
-//        // Write objects to file
-//        o.writeObject(fact);
-//
-//        o.close();
-//        f.close();
-//
-////        FileOutputStream outStream = null;
-////        try {
-////            File f = new File(Environment.getExternalStorageDirectory(), fileName);
-////            outStream = new FileOutputStream(f);
-////            ObjectOutputStream objectOutStream = new ObjectOutputStream(outStream);
-////            objectOutStream.writeObject(writeList);
-////            objectOutStream.close();
-////        } catch (FileNotFoundException e1) {
-////            e1.printStackTrace();
-////        } catch (IOException e1) {
-////            e1.printStackTrace();
-////        }
-//    }
-//
-//    public void loadState(String category) {
-//        List<Fact> s =null;
-//        FileInputStream inStream = null;
-//        try {
-//            File f = new File(Environment.getExternalStorageDirectory(), "sdcard/sports.txt");
-//            inStream = new FileInputStream(f);
-//            ObjectInputStream objectInStream = new ObjectInputStream(inStream);
-//
-//            s = ((List<Fact>) objectInStream.readObject());
-//            objectInStream.close();
-//        } catch (FileNotFoundException e1) {
-//            e1.printStackTrace();
-//        } catch (ClassNotFoundException e1) {
-//            e1.printStackTrace();
-//        } catch (OptionalDataException e1) {
-//            e1.printStackTrace();
-//        } catch (StreamCorruptedException e1) {
-//            e1.printStackTrace();
-//        } catch (IOException e1) {
-//            e1.printStackTrace();
-//        }
-//
-//        switch (category) {
-//            case "Sports":
-//                sports = s;
-//                break;
-//            case "Animals":
-//                animals = s;
-//                break;
-//            case "Politics":
-//                politics = s;
-//                break;
-//            case "History":
-//                history = s;
-//                break;
-//            case "IT":
-//                it = s;
-//                break;
-//        }
-//
-//    }
+
 
 }
