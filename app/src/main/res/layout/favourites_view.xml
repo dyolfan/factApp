@@ -10,6 +10,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/fact_bcg1"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -22,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="90dp"
             android:layout_weight="1"
-            android:background="?colorPrimary"
+            android:background="?colorPrimaryDark"
             android:clipToPadding="false"
             android:elevation="7dp"
             app:contentInsetLeft="0dp"
@@ -59,9 +60,7 @@
                     android:background="@null"
                     android:paddingLeft="15dp"
                     android:paddingRight="10dp"
-                    android:scaleX="1.5"
-                    android:scaleY="1.5"
-                    app:srcCompat="?attr/homeAsUpIndicator" />
+                    app:srcCompat="@drawable/arrow_back" />
 
             </RelativeLayout>
 
@@ -82,115 +81,116 @@
                 android:id="@+id/facts"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
                 android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/fact_1"
-                    android:layout_width="match_parent"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="#ff9800"
+                    android:background="#C842A5F5"
                     android:padding="5dp"
-                    android:text="Start of fact 1 ..."
+                    android:text="Loading.."
                     android:textColor="@android:color/black"
                     android:textSize="27sp" />
 
                 <TextView
                     android:id="@+id/fact_2"
-                    android:layout_width="match_parent"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="#7CB342"
+                    android:background="#C842A5F5"
                     android:padding="5dp"
-                    android:text="Start of fact 7 ..."
+                    android:text="Loading.."
                     android:textColor="@android:color/black"
                     android:textSize="27sp" />
 
                 <TextView
                     android:id="@+id/fact_3"
-                    android:layout_width="match_parent"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="#009688"
+                    android:background="#C842A5F5"
                     android:padding="5dp"
-                    android:text="Start of fact 5 ..."
+                    android:text="Loading.."
                     android:textColor="@android:color/black"
                     android:textSize="27sp" />
 
                 <TextView
                     android:id="@+id/fact_4"
-                    android:layout_width="match_parent"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="#9c27b0"
+                    android:background="#C842A5F5"
                     android:padding="5dp"
-                    android:text="Start of fact 3 ..."
+                    android:text="Loading.."
                     android:textColor="@android:color/black"
                     android:textSize="27sp" />
 
                 <TextView
                     android:id="@+id/fact_5"
-                    android:layout_width="match_parent"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="#f44336"
+                    android:background="#C842A5F5"
                     android:padding="5dp"
-                    android:text="Start of fact 2 ..."
+                    android:text="Loading.."
                     android:textColor="@android:color/black"
                     android:textSize="27sp" />
 
                 <TextView
                     android:id="@+id/fact_6"
-                    android:layout_width="match_parent"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="#43A047"
+                    android:background="#C842A5F5"
                     android:padding="5dp"
-                    android:text="Start of fact 6 ..."
+                    android:text="Loading.."
                     android:textColor="@android:color/black"
                     android:textSize="27sp" />
 
                 <TextView
                     android:id="@+id/fact_7"
-                    android:layout_width="match_parent"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="#C0CA33"
+                    android:background="#C842A5F5"
                     android:padding="5dp"
-                    android:text="Start of fact 8..."
+                    android:text="Loading.."
                     android:textColor="@android:color/black"
                     android:textSize="27sp" />
 
                 <TextView
                     android:id="@+id/fact_8"
-                    android:layout_width="match_parent"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="#3f51b5"
+                    android:background="#C842A5F5"
                     android:padding="5dp"
-                    android:text="Start of fact 4 ..."
+                    android:text="Loading.."
                     android:textColor="@android:color/black"
                     android:textSize="27sp" />
 
                 <TextView
                     android:id="@+id/fact_9"
-                    android:layout_width="match_parent"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="#FDD835"
+                    android:background="#C842A5F5"
                     android:padding="5dp"
-                    android:text="Start of fact 9..."
+                    android:text="Loading.."
                     android:textColor="@android:color/black"
                     android:textSize="27sp" />
 
                 <TextView
                     android:id="@+id/fact_10"
-                    android:layout_width="match_parent"
+                    android:layout_width="300dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:background="#FFB300"
+                    android:background="#C842A5F5"
                     android:padding="5dp"
-                    android:text="Start of fact 10 ..."
+                    android:text="Loading.."
                     android:textColor="@android:color/black"
                     android:textSize="27sp" />
 

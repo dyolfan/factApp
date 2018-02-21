@@ -21,12 +21,18 @@ import android.widget.LinearLayout;
 import android.widget.ShareActionProvider;
 
 import com.colors.student.factsapp.databases.Fact;
+<<<<<<< HEAD
 import com.colors.student.factsapp.databases.FactList;
+=======
+>>>>>>> eb8c1d72d10f910789b050d819b032e3732756af
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.widget.ShareDialog;
 import com.colors.student.factsapp.databases.FactController;
 import com.google.firebase.database.DataSnapshot;
+<<<<<<< HEAD
 import com.google.firebase.database.DatabaseError;
+=======
+>>>>>>> eb8c1d72d10f910789b050d819b032e3732756af
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
@@ -36,11 +42,16 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
+<<<<<<< HEAD
 import java.util.List;
 
 import static android.content.ContentValues.TAG;
+=======
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+>>>>>>> eb8c1d72d10f910789b050d819b032e3732756af
 
 
 /**
@@ -48,8 +59,8 @@ import static android.content.ContentValues.TAG;
  */
 
 public class FactActivity extends AppCompatActivity {
+    FactList list;
     DatabaseReference mDatabase;
-    FactList list = new FactList();
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +84,7 @@ public class FactActivity extends AppCompatActivity {
 
         String message = intent.getExtras().getString("category");
         category.setText(message);
+<<<<<<< HEAD
 
         mDatabase = FirebaseDatabase.getInstance("https://factsapp-19a2f.firebaseio.com/").getReference().child(message);
         list = new FactList();
@@ -120,6 +132,24 @@ public class FactActivity extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
+=======
+//
+//        FactController fc = new FactController();
+//        fc.setList();
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference myRef = database.getReference("Animals");
+//        myRef.setValue(fc.factList.history);
+
+
+//        factBox.setText(fc.factList.getFact(message).getText());
+//
+//        getFact.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                factBox.setText(fc.factList.getFact(message).getText());
+//            }
+//        });
+>>>>>>> eb8c1d72d10f910789b050d819b032e3732756af
 
 
         toMenu.setOnClickListener(view -> {

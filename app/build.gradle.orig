@@ -12,7 +12,6 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
 
-
     }
     buildTypes {
         release {
@@ -42,7 +41,10 @@ dependencies {
     implementation 'com.android.support:animated-vector-drawable:27.0.2'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation 'com.google.firebase:firebase-database:11.8.0'
+<<<<<<< HEAD
+=======
     implementation 'com.firebaseui:firebase-ui-database:0.4.0'
+>>>>>>> eb8c1d72d10f910789b050d819b032e3732756af
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.android.support:design:26.1.0'

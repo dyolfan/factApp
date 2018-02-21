@@ -28,7 +28,9 @@ public class MainActivity extends AppCompatActivity {
 
         Intents intents = new Intents(this);
         Button topFactsBtn = this.findViewById(R.id.topfactsBtn);
-        Button favFactsBtn = this.findViewById(R.id.mefavBtn);
+        Button favFactsBtn = this.findViewById(R.id.myFavBtn);
+        Button addNewFact = this.findViewById(R.id.addFactBtn);
+
         Button sports = this.findViewById(R.id.sportsBtn);
         Button animals = this.findViewById(R.id.animalsBtn);
         Button history = this.findViewById(R.id.historyBtn);
@@ -43,6 +45,10 @@ public class MainActivity extends AppCompatActivity {
         favFactsBtn.setOnClickListener((v)-> {
             startActivity(intents.favourites);
         });
+        addNewFact.setOnClickListener((v)->{
+            startActivity(intents.newFact);
+        });
+
         sports.setOnClickListener((v)->{
             Intent intent = intents.factView;
             String buttonText = sports.getText().toString();

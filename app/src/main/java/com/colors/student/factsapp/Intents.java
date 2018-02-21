@@ -15,6 +15,7 @@ public class Intents extends AppCompatActivity {
     Intent rating;
     Intent favourites;
     Intent factView;
+    Intent newFact;
 
 
     Intents(Context thisContext){
@@ -24,6 +25,7 @@ public class Intents extends AppCompatActivity {
         this.topFact = new Intent(thisContext, TopFacts.class);
         this.favourites = new Intent(thisContext, FavouritesActivity.class);
         this.factView = new Intent(thisContext, FactActivity.class);
+        this.newFact = new Intent(thisContext, AddFact.class);
     }
 
 }

@@ -1,39 +1,56 @@
 package com.colors.student.factsapp;
 
-import android.content.Intent;
-import android.graphics.drawable.Icon;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
-import android.view.Window;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import java.util.HashSet;
-import java.util.Set;
+import com.colors.student.factsapp.databases.Fact;
+import com.colors.student.factsapp.databases.FactList;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by kirils on 13.02.18.
  */
 
+
+
 public class TopFacts extends AppCompatActivity {
-
-    private Fact[] facts;
-
-    public class Fact {
-        TextView view;
-        String shortFact;
-        boolean oppened = false;
-        String fullFact;
-        Fact(String shortFact, String fullFact, TextView view) {
-            this.shortFact = shortFact;
-            this.fullFact = fullFact;
-            this.view = view;
-        }
-    }
+    private Fact[] facts = new Fact[10];
+    private TextView r1;
+    private TextView r2;
+    private TextView r3;
+    private TextView r4;
+    private TextView r5;
+    private TextView r6;
+    private TextView r7;
+    private TextView r8;
+    private TextView r9;
+    private TextView r10;
+    private TextView[] rs;
+    private static FactList list = new FactList();
+    private static DatabaseReference dRef;
+    String selected = "Sports";
+    boolean wasSelectedSports = false;
+    boolean wasSelectedAnimals = false;
+    boolean wasSelectedPolitics = false;
+    boolean wasSelectedIt = false;
+    boolean wasSelectedHistory = false;
+    String selectedString = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,33 +68,111 @@ public class TopFacts extends AppCompatActivity {
 
         adapter.setDropDownViewResource(R.layout.spinner_item);
         spinner.setAdapter(adapter);
+        r1 = (TextView) this.findViewById(R.id.fact_r1);
+        r2 = (TextView) this.findViewById(R.id.fact_r2);
+        r3 = (TextView) this.findViewById(R.id.fact_r3);
+        r4 = (TextView) this.findViewById(R.id.fact_r4);
+        r5 = (TextView) this.findViewById(R.id.fact_r5);
+        r6 = (TextView) this.findViewById(R.id.fact_r6);
+        r7 = (TextView) this.findViewById(R.id.fact_r7);
+        r8 = (TextView) this.findViewById(R.id.fact_r8);
+        r9 = (TextView) this.findViewById(R.id.fact_r9);
+        r10 = (TextView) this.findViewById(R.id.fact_r10);
+        TextView[] rs1 = {r1,r2,r3,r4,r5,r6,r7,r8,r9,r10};
+        rs = rs1;
+        list = new FactList();
 
-        Fact fact1 = new Fact("Start of fact 1...", "Start of fact 1 and more more more more more more more more more more more more more more text",
-                (TextView) this.findViewById(R.id.fact_r1));
-        Fact fact2 = new Fact("Start of fact 2...", "Start of fact 2 and more more more more more more more more more more more more more more text",
-                (TextView) this.findViewById(R.id.fact_r2));
-        Fact fact3 = new Fact("Start of fact 3...", "Start of fact 3 and more more more more more more more more more more more more more more text",
-                (TextView) this.findViewById(R.id.fact_r3));
-        Fact fact4 = new Fact("Start of fact 4...", "Start of fact 4 and more more more more more more more more more more more more more more text",
-                (TextView) this.findViewById(R.id.fact_r4));
+// Thread code ends
 
-        facts = new Fact[]{fact1, fact2, fact3, fact4};
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                selected = spinner.getSelectedItem().toString();
+                dRef = FirebaseDatabase.getInstance("https://factsapp-19a2f.firebaseio.com/").getReference().child(selected);
+                dRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // This method is called once with the initial value and again
+                        // whenever data at this location is updated.
+                        if (!selectedString.contains(selected)) {
+                            for (DataSnapshot uniqueKeySnapshot : dataSnapshot.getChildren()) {
+                                String text = uniqueKeySnapshot.child("text").getValue().toString();
+                                int rating = Integer.parseInt(uniqueKeySnapshot.child("rating").getValue().toString());
+                                Fact newFact = new Fact(text, rating);
+                                Log.i("tag: ", newFact.toString());
 
-        for (int i = 0; i < facts.length; i++)
-            setListeners(i);
+                                switch (selected) {
+                                    case "Sports":
+                                        list.sports.add(newFact);
+                                        break;
+                                    case "Animals":
+                                        list.animals.add(newFact);
+                                        break;
+                                    case "Politics":
+                                        list.politics.add(newFact);
+                                        break;
+                                    case "History":
+                                        list.history.add(newFact);
+                                        break;
+                                    case "IT":
+                                        list.it.add(newFact);
+                                        break;
+                                }
+                            }
 
-//        shortFact1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // TODO: Get text from top 1 fact
-//                if(!oppened) {
-//                    shortFact1.setText("Start of fact 1 and more more more more more more more more more more more more more more text");
-//                    oppened = true;
-//                } else { shortFact1.setText("Start of fact 1...");
-//                    oppened = false;
-//                }
-//            }
-//        });
+                            switch (selected) {
+                                case "Sports":
+                                    for (int i = 0; i < 10; i++)
+                                        rs[i].setText(list.sports.get(i).getShortText());
+                                    facts = list.sports.toArray(facts);
+                                    wasSelectedSports = true;
+                                    break;
+                                case "Animals":
+                                    for (int i = 0; i < 10; i++)
+                                        rs[i].setText(list.animals.get(i).getShortText());
+                                    facts = list.animals.toArray(facts);
+                                    wasSelectedAnimals = true;
+                                    break;
+                                case "Politics":
+                                    for (int i = 0; i < 10; i++)
+                                        rs[i].setText(list.politics.get(i).getShortText());
+                                    facts = list.politics.toArray(facts);
+                                    wasSelectedPolitics = true;
+                                    break;
+                                case "History":
+                                    for (int i = 0; i < 10; i++)
+                                        rs[i].setText(list.history.get(i).getShortText());
+                                    facts = list.sports.toArray(facts);
+                                    wasSelectedHistory = true;
+                                    break;
+                                case "IT":
+                                    for (int i = 0; i < 10; i++)
+                                        rs[i].setText(list.it.get(i).getShortText());
+                                    facts = list.sports.toArray(facts);
+                                    wasSelectedIt = true;
+                                    break;
+                            }
+                            for (int i = 0; i < 10; i++)
+                                setListeners(i);
+                            selectedString += selected;
+                        }
+                        changeTop(selected);
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w(TAG, "Failed to read value.", error.toException());
+                    }
+                });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         toMainMenuBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,18 +180,60 @@ public class TopFacts extends AppCompatActivity {
                 startActivity(intents.mainMenu);
             }
         });
+
+
+
+
     }
 
+    private void changeTop(String category) {
+        switch (category) {
+            case "Sports":
+                list.sortTopFacts(category);
+                for(int i = 0; i <10; i++)
+                    rs[i].setText(list.sports.get(i).getShortText());
+                facts = list.sports.toArray(facts);
+                break;
+
+            case "Animals":
+                list.sortTopFacts(category);
+                for(int i = 0; i <10; i++)
+                    rs[i].setText(list.animals.get(i).getShortText());
+                facts = list.animals.toArray(facts);
+                break;
+
+            case "Politics":
+                list.sortTopFacts(category);
+                for(int i = 0; i <10; i++)
+                    rs[i].setText(list.politics.get(i).getShortText());
+                facts = list.politics.toArray(facts);
+                break;
+            case "History":
+                list.sortTopFacts(category);
+                for(int i = 0; i <10; i++)
+                    rs[i].setText(list.history.get(i).getShortText());
+                facts = list.history.toArray(facts);
+                break;
+            case "IT":
+                list.sortTopFacts(category);
+                for(int i = 0; i <10; i++)
+                    rs[i].setText(list.it.get(i).getShortText());
+                facts = list.it.toArray(facts);
+                break;
+        }
+        for (int i = 0; i < 10; i++)
+            setListeners(i);
+    }
 
     private void setListeners(final int i) {
         final int x = i;
-        facts[i].view.setOnClickListener(new View.OnClickListener() {
+        rs[i].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!facts[x].oppened) {
-                    facts[x].view.setText(facts[i].fullFact);
+                    rs[i].setText(facts[i].getText());
                     facts[x].oppened = true;
-                }   else { facts[x].view.setText(facts[i].shortFact);
+                }   else { rs[i].setText(facts[i].getShortText());
                     facts[x].oppened = false;
                 }
             }

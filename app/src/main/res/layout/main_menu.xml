@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainMenu"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorPrimaryLight"
+        android:layout_marginStart="-5dp"
+        android:background="@drawable/bcg_4"
+        android:backgroundTint="@color/colorPrimaryLight"
+        android:backgroundTintMode="@color/colorPrimaryLight"
         android:gravity="center_vertical|center_horizontal"
         android:orientation="vertical"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,75 +23,110 @@
 
         <Button
             android:id="@+id/topfactsBtn"
-            android:layout_width="300dp"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="20dp"
-            android:backgroundTint="#f44336"
+            android:background="@color/colorPrimaryDark"
+            android:elevation="6dp"
             android:text="Top facts"
             android:textColor="@android:color/white"
-            android:textSize="30dp" />
+            android:textSize="30sp" />
 
         <Button
             android:id="@+id/sportsBtn"
-            android:layout_width="300dp"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="35dp"
-            android:backgroundTint="#ff9800"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="40dp"
+            android:background="#C81565C0"
+            android:elevation="6dp"
             android:text="Sports"
             android:textColor="@android:color/white"
-            android:textSize="30dp"
-            tools:text="Sports" />
+            android:textSize="26sp" />
 
         <Button
             android:id="@+id/animalsBtn"
-            android:layout_width="300dp"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#f44336"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:background="#C81976D2"
+            android:elevation="6dp"
             android:text="Animals"
             android:textColor="@android:color/white"
-            android:textSize="30dp"
-            tools:text="Animals" />
+            android:textSize="26sp" />
 
         <Button
             android:id="@+id/historyBtn"
-            android:layout_width="300dp"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#9c27b0"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:background="#C81E88E5"
+            android:elevation="6dp"
             android:text="History"
             android:textColor="@android:color/white"
-            android:textSize="30dp"
-            tools:text="History" />
+            android:textSize="26sp" />
 
         <Button
             android:id="@+id/itBtn"
-            android:layout_width="300dp"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#3f51b5"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:background="#C82196F3"
+            android:elevation="6dp"
             android:text="IT"
             android:textColor="@android:color/white"
-            android:textSize="30dp"
-            tools:text="IT" />
+            android:textSize="26sp" />
 
         <Button
             android:id="@+id/politicsBtn"
-            android:layout_width="300dp"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#009688"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:background="#C842A5F5"
+            android:elevation="6dp"
             android:text="Politics"
             android:textColor="@android:color/white"
-            android:textSize="30dp" />
+            android:textSize="26sp" />
 
         <Button
-            android:id="@+id/mefavBtn"
-            android:layout_width="300dp"
+            android:id="@+id/myFavBtn"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
             android:layout_marginTop="40dp"
-            android:backgroundTint="#f44336"
+            android:background="#64B5F6"
+            android:elevation="6dp"
             android:text="My favourites"
             android:textColor="@android:color/white"
-            android:textSize="30dp"
-            tools:text="My favourites" />
+            android:textSize="30sp" />
 
-        android:text="Button" />
+        <Button
+            android:id="@+id/addFactBtn"
+            style="?android:attr/borderlessButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="40dp"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="0dp"
+            android:background="#90CAF9"
+            android:elevation="6dp"
+            android:text="Add new fact"
+            android:textColor="@android:color/white"
+            android:textSize="30sp" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

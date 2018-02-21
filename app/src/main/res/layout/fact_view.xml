@@ -2,29 +2,32 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/factView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#E0F2F1">
+    android:layout_height="match_parent">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="?colorPrimary"
-        app:contentInsetLeft="0dp"
-        app:contentInsetStart="0dp"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar3"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:dividerPadding="8dp"
-            android:showDividers="end"
-            tools:layout_editor_absoluteY="3dp">
+            android:layout_height="match_parent"
+            android:layout_weight="11"
+            android:clipToPadding="false"
+            app:contentInsetLeft="0dp"
+            app:contentInsetStart="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
                 <ImageButton
                     android:id="@+id/shareBtn"
@@ -46,6 +49,7 @@
                     android:layout_centerHorizontal="true"
                     android:gravity="center_vertical"
                     android:textAlignment="center"
+                    android:textColor="@color/colorAccent"
                     android:textSize="28sp"
                     android:textStyle="bold" />
 
@@ -58,84 +62,127 @@
                     android:background="@null"
                     android:paddingLeft="15dp"
                     android:paddingRight="10dp"
-                    android:scaleX="2"
-                    android:scaleY="2"
-                    app:srcCompat="?attr/homeAsUpIndicator" />
+                    app:srcCompat="@drawable/arrow_back" />
             </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/fact_bcg1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/thisFact"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <ScrollView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:id="@+id/factBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="20dp"
+                        android:layout_marginEnd="50dp"
+                        android:layout_marginStart="50dp"
+                        android:layout_marginTop="40dp"
+
+                        android:text="Loading..."
+                        android:textAlignment="center"
+                        android:textColor="@color/colorAccent"
+                        android:textSize="34sp"
+                        app:layout_constraintBottom_toTopOf="@+id/favouriteFact"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
+                </ScrollView>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageButton
+                        android:id="@+id/favouriteFact"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:paddingBottom="12dp"
+                        android:scaleX="1.5"
+                        android:scaleY="1.5"
+                        app:layout_constraintBottom_toTopOf="@+id/getFact"
+                        app:layout_constraintEnd_toStartOf="@+id/voteDownBtn"
+                        app:layout_constraintStart_toEndOf="@+id/voteUpBtn"
+                        app:srcCompat="@drawable/heart_icon" />
+
+                    <Button
+                        android:id="@+id/voteDownBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginEnd="35dp"
+                        android:layout_marginStart="20dp"
+                        android:backgroundTint="@color/colorAccent"
+                        android:elevation="3dp"
+                        android:text="Vote -"
+                        android:textSize="16sp"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toTopOf="@+id/getFact"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@+id/favouriteFact" />
+
+                    <Button
+                        android:id="@+id/getFact"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="30dp"
+                        android:layout_marginEnd="35dp"
+                        android:layout_marginStart="35dp"
+                        android:backgroundTint="@color/white"
+                        android:elevation="5dp"
+                        android:text="Get a Fact"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent" />
+
+                    <Button
+                        android:id="@+id/voteUpBtn"
+                        android:layout_width="0dp"
+                        android:layout_height="56dp"
+                        android:layout_marginBottom="5dp"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginStart="35dp"
+                        android:backgroundTint="@color/colorAccent"
+                        android:elevation="3dp"
+                        android:text="Vote +"
+                        android:textSize="16sp"
+                        android:visibility="visible"
+                        app:layout_constraintBottom_toTopOf="@+id/getFact"
+                        app:layout_constraintEnd_toStartOf="@+id/favouriteFact"
+                        app:layout_constraintStart_toStartOf="parent" />
+                </android.support.constraint.ConstraintLayout>
+            </LinearLayout>
 
         </LinearLayout>
-    </android.support.v7.widget.Toolbar>
 
-    <TextView
-        android:id="@+id/factBox"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginEnd="50dp"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="40dp"
-        android:text="Fact Text //We could try to do that the text size changes depending on the lenght of the fact"
-        android:textAlignment="center"
-        android:textSize="34sp"
-        app:layout_constraintBottom_toTopOf="@+id/favouriteFact"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <Button
-        android:id="@+id/voteUpBtn"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginEnd="20dp"
-        android:layout_marginStart="35dp"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:text="Vote +"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/getFact"
-        app:layout_constraintEnd_toStartOf="@+id/favouriteFact"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageButton
-        android:id="@+id/favouriteFact"
-        android:layout_width="wrap_content"
-        android:layout_height="56dp"
-        android:layout_marginBottom="10dp"
-        android:background="@null"
-        android:scaleX="2.3"
-        android:scaleY="2.3"
-        app:layout_constraintBottom_toTopOf="@+id/getFact"
-        app:layout_constraintEnd_toStartOf="@+id/voteDownBtn"
-        app:layout_constraintStart_toEndOf="@+id/voteUpBtn"
-        app:srcCompat="@drawable/heart_icon" />
-
-    <Button
-        android:id="@+id/voteDownBtn"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginBottom="5dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginStart="20dp"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:text="Vote -"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@+id/getFact"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/favouriteFact" />
-
-    <Button
-        android:id="@+id/getFact"
-        android:layout_width="0dp"
-        android:layout_height="56dp"
-        android:layout_marginBottom="30dp"
-        android:layout_marginEnd="35dp"
-        android:layout_marginStart="35dp"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:text="Get a Fact"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

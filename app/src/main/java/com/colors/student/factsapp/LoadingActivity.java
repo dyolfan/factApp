@@ -12,10 +12,15 @@ import android.util.Log;
 import android.view.Window;
 import android.widget.ProgressBar;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class LoadingActivity extends AppCompatActivity {
+
+
     private static int SPLASH_TIME_OUT = 2500;
     ProgressBar loading;
     private int progressStatus = 0;
@@ -29,6 +34,9 @@ public class LoadingActivity extends AppCompatActivity {
         loading = findViewById(R.id.progressBar);
 
         Intents intents = new Intents(this);
+
+
+
 
         new Thread(new Runnable() {
             public void run() {
