@@ -11,7 +11,6 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.colors.student.factsapp.databases.Fact;
-import com.colors.student.factsapp.databases.FactController;
 import com.colors.student.factsapp.databases.FactList;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -177,9 +176,10 @@ public class TopFacts extends AppCompatActivity {
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 for (DataSnapshot uniqueKeySnapshot : dataSnapshot.getChildren()) {
+                    String key = uniqueKeySnapshot.getKey();
                     String text = uniqueKeySnapshot.child("text").getValue().toString();
                     int rating = Integer.parseInt(uniqueKeySnapshot.child("rating").getValue().toString());
-                    Fact newFact = new Fact(text, rating);
+                    Fact newFact = new Fact(text, rating, key);
                     Log.i("tag: ", newFact.toString());
                     switch (category) {
                         case "Sports":

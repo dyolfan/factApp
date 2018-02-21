@@ -8,13 +8,14 @@ import android.support.annotation.NonNull;
 
 public class Fact implements Comparable<Fact>{
 
-
+    public  String key;
     public String text;
     public String shortText;
     public int rating;
     public boolean oppened = false;
 
-    public Fact(String txt, int rating){
+    public Fact(String txt, int rating, String key){
+        this.key = key;
         this.text = txt;
         this.rating = rating;
         this.shortText = getShortText();
@@ -29,6 +30,9 @@ public class Fact implements Comparable<Fact>{
         if (text.length()<15)
             return text;
        return  text.substring(0, 14)+ "... ";
+    }
+    public String getKey(){
+        return this.key;
     }
 
 

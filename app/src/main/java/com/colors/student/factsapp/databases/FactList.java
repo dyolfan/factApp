@@ -60,7 +60,7 @@ public class FactList {
     }
     public void userAddFact(String factText, String category){
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
-        Fact newFact = new Fact(factText, 0);
+        Fact newFact = new Fact(factText, 0, "0");
         dbRef.child(category).push().setValue(newFact);
     }
 

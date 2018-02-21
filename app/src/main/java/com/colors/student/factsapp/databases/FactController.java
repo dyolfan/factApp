@@ -11,7 +11,6 @@ import java.sql.SQLException;
 public class FactController{
     public FactList factList = new FactList();
     int rating = 0;
-
     public void setList() {}
 
 }
