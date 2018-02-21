@@ -45,7 +45,7 @@ public class FavouritesActivity extends AppCompatActivity {
         TextView favfact = findViewById(R.id.fact_1);
 
         List<FavouritesModel> arrayList = sQLiteHelper.getAllRecords();
-        String fullFact = arrayList.get(0).getFact();
+        String fullFact = ""+ arrayList.get(0).getFact();
         String shortfact = fullFact;
         if(fullFact.length() > 18)
             shortfact = fullFact.substring(0,14) + "...";

@@ -33,7 +33,7 @@ import java.util.Properties;
  */
 
 public class MainActivity extends AppCompatActivity {
-    public Connection conn;
+
     public static SQLiteHelper sQLiteHelper;
 
     @Override
