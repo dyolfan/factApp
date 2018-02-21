@@ -98,8 +98,9 @@ public class TopFacts extends AppCompatActivity {
                         if (!selectedString.contains(selected)) {
                             for (DataSnapshot uniqueKeySnapshot : dataSnapshot.getChildren()) {
                                 String text = uniqueKeySnapshot.child("text").getValue().toString();
+                                String key = uniqueKeySnapshot.getKey();
                                 int rating = Integer.parseInt(uniqueKeySnapshot.child("rating").getValue().toString());
-                                Fact newFact = new Fact(text, rating);
+                                Fact newFact = new Fact(text, rating, key);
                                 Log.i("tag: ", newFact.toString());
 
                                 switch (selected) {

@@ -3,10 +3,9 @@ package com.colors.student.factsapp;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.support.v4.content.FileProvider;
 import android.widget.ScrollView;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +15,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.colors.student.factsapp.databases.Fact;
 import com.colors.student.factsapp.databases.FactList;
@@ -29,6 +29,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import static com.colors.student.factsapp.MainActivity.sQLiteHelper;
 import static android.content.ContentValues.TAG;
 
 
@@ -37,19 +38,15 @@ import static android.content.ContentValues.TAG;
  */
 
 public class FactActivity extends AppCompatActivity {
+    private ShareActionProvider mShareActionProvider;
+    DatabaseError databaseError;
     DatabaseReference mDatabase;
     FactList list = new FactList();
-<<<<<<< HEAD
     private Fact currentFact;
     DatabaseReference currentFactToChange;
+    TextView category;
 
-=======
->>>>>>> 27d0826aee2b5a85354a25601379a8d9140113b5
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
     protected void onCreate(Bundle savedInstanceState) {
-
-
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
@@ -72,14 +69,15 @@ public class FactActivity extends AppCompatActivity {
         String message = intent.getExtras().getString("category");
         category.setText(message);
 
+        //Favourite/SQLite related variables
+        ImageButton favourite = findViewById(R.id.favouriteFact);
+        TextView factToBeFavourited = findViewById(R.id.factBox);
+
         mDatabase = FirebaseDatabase.getInstance("https://factsapp-19a2f.firebaseio.com/").getReference().child(message);
-//        Log.i("database", mDatabase.toString());
         list = new FactList();
         mDatabase.addValueEventListener(new ValueEventListener() {
-
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-
                 // This method is called once with the initial value and again
                 // whenever data at this location is updated.
                 for (DataSnapshot uniqueKeySnapshot : dataSnapshot.getChildren()) {
@@ -88,7 +86,6 @@ public class FactActivity extends AppCompatActivity {
                     String text = uniqueKeySnapshot.child("text").getValue().toString();
                     int rating = Integer.parseInt(uniqueKeySnapshot.child("rating").getValue().toString());
                     Fact newFact = new Fact(text, rating, key);
-//                    Log.i("tag: ", newFact.toString());
                     switch (message) {
                         case "Sports":
                             list.sports.add(newFact);
@@ -112,10 +109,11 @@ public class FactActivity extends AppCompatActivity {
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
-//                Log.w(TAG, "Failed to read value.", error.toException());
+                Log.w(TAG, "Failed to read value.", error.toException());
             }
 
-        });
+
+    });
 
         getFact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -128,67 +126,87 @@ public class FactActivity extends AppCompatActivity {
             }
         });
 
-        voteUp.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                System.out.println(currentFact.getKey());
-                System.out.println(currentFact.getText());
-                    currentFactToChange.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            String rating = dataSnapshot.getValue().toString();
-                            int ratingInt = Integer.parseInt(rating);
-                            try{
-                                mDatabase.child(currentFact.getKey()).child("rating").setValue(ratingInt+1);
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                            Log.w(TAG, "onCancelled", databaseError.toException());
-                        }
-                    });
-            }
-        });
+    toMenu.setOnClickListener(view -> {
+        Intent myIntent = new Intent(Intent.ACTION_SEND);
+        intent.setType("text/plain");
+        String shareText = "Your Body here";
+        String shareSub = "Subtitle";
+        myIntent.putExtra(Intent.EXTRA_TEXT, shareText);
+        myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
+        startActivity(Intent.createChooser(myIntent, "Share using"));
+        startActivity(intents.mainMenu);
+    });
 
-        voteDown.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view){
-                System.out.println(currentFact.getKey());
-                System.out.println(currentFact.getText());
-                System.out.println(mDatabase.child(currentFact.getKey()).child("rating"));
-                currentFactToChange.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        String rating = dataSnapshot.getValue().toString();
-                        int ratingInt = Integer.parseInt(rating);
-                        System.out.println(dataSnapshot);
-                        try{
-                            mDatabase.child(currentFact.getKey()).child("rating").setValue(ratingInt-1);
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
+
+
+    favourite.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+
+            //sQLiteHelper.remakeTable();
+            String factString = factToBeFavourited.getText().toString();
+            FavouritesModel contact = new FavouritesModel(factString);
+            sQLiteHelper.insertRecord(contact);
+            //FavouritesModel delpls = new FavouritesModel(factToBeFavourited.getText().toString());
+            //sQLiteHelper.deleteRecord(delpls);
+        }
+    });
+
+    voteUp.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view){
+            System.out.println(currentFact.getKey());
+            System.out.println(currentFact.getText());
+            currentFactToChange.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String rating = dataSnapshot.getValue().toString();
+                    int ratingInt = Integer.parseInt(rating);
+                    try{
+                        mDatabase.child(currentFact.getKey()).child("rating").setValue(ratingInt+1);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.w(TAG, "onCancelled", databaseError.toException());
+                }
+            });
+        }
+    });
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        Log.w(TAG, "onCancelled", databaseError.toException());
+    voteDown.setOnClickListener(new View.OnClickListener()
+
+    {
+        @Override
+        public void onClick (View view){
+            System.out.println(currentFact.getKey());
+            System.out.println(currentFact.getText());
+            System.out.println(mDatabase.child(currentFact.getKey()).child("rating"));
+            currentFactToChange.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    String rating = dataSnapshot.getValue().toString();
+                    int ratingInt = Integer.parseInt(rating);
+                    System.out.println(dataSnapshot);
+                    try {
+                        mDatabase.child(currentFact.getKey()).child("rating").setValue(ratingInt - 1);
+                    } catch (Exception e) {
+                        e.printStackTrace();
                     }
-                });
-            }
-        });
+                }
 
-        toMenu.setOnClickListener(view -> {
-            Intent myIntent = new Intent(Intent.ACTION_SEND);
-            intent.setType("text/plain");
-            String shareText = "Your Body here";
-            String shareSub = "Subtitle";
-            myIntent.putExtra(Intent.EXTRA_TEXT, shareText);
-            myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
-            startActivity(Intent.createChooser(myIntent, "Share using"));
-            startActivity(intents.mainMenu);
-        });
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    Log.w(TAG, "onCancelled", databaseError.toException());
+                }
+            });
+        }
+    });
+
+
+
         share.setOnClickListener(view -> {
             thisFact.setDrawingCacheEnabled(true);
             Bitmap bitmap = thisFact.getDrawingCache();
@@ -214,8 +232,6 @@ public class FactActivity extends AppCompatActivity {
                 startActivity(Intent.createChooser(shareIntent, "Choose an app"));
             }
         });
-
-
     }
 
 }

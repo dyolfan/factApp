@@ -3,12 +3,20 @@ package com.colors.student.factsapp;
 /**
  * Created by Peteris on 18.14.2.
  */
-
+//Object where we store a fact and its details(id,category)
 public class FavouritesModel {
 
     private int id;
     int category;
     String fact;
+
+    FavouritesModel(){
+
+    }
+
+    FavouritesModel(String fact){
+        this.fact = fact;
+    }
 
     public int getID() {
         return id;

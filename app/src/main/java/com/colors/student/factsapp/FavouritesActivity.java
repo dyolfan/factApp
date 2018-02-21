@@ -3,8 +3,13 @@ package com.colors.student.factsapp;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
+import java.util.List;
+
+import static com.colors.student.factsapp.MainActivity.sQLiteHelper;
 
 /**
  * Created by Helena on 14/02/18.
@@ -13,6 +18,7 @@ import android.widget.TextView;
 public class FavouritesActivity extends AppCompatActivity {
 
     private Fact[] facts;
+
 
     public class Fact{
         String shortFact;
@@ -33,9 +39,18 @@ public class FavouritesActivity extends AppCompatActivity {
 
         ImageButton toMainMenu = findViewById(R.id.toMainMenu);
         Intents intents = new Intents(this);
+        TextView fact = findViewById(R.id.factBox);
+        ImageButton favourite = findViewById(R.id.favouriteFact);
+        TextView favfact = findViewById(R.id.fact_1);
+// Models list \/
+        List<FavouritesModel> arrayList = sQLiteHelper.getAllRecords();
+        String fullFact = ""+ arrayList.get(0).getFact();
+        String shortfact = fullFact;
+        if(fullFact.length() > 18)
+            shortfact = fullFact.substring(0,14) + "...";
 
 
-        Fact fact1 = new Fact("Start of fact 1...", "Start of fact 1 and more more more more more more more more more more more more more more text",
+        Fact fact1 = new Fact(shortfact, fullFact,
                 (TextView) this.findViewById(R.id.fact_1));
         Fact fact2 = new Fact("Start of fact 2...", "Start of fact 2 and more more more more more more more more more more more more more more text",
                 (TextView) this.findViewById(R.id.fact_2));
@@ -58,6 +73,8 @@ public class FavouritesActivity extends AppCompatActivity {
 
     }
 
+
+
     private void setListeners(final int i) {
         final int x = i;
         facts[i].view.setOnClickListener(new View.OnClickListener() {
@@ -72,5 +89,7 @@ public class FavouritesActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
 }
