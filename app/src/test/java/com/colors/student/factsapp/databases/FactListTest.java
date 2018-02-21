@@ -10,6 +10,7 @@ import static org.junit.Assert.*;
 public class FactListTest {
     @Test
     public void addFact() throws Exception {
+    Fact fact = new Fact(4, "Wood is si doow, bla bla bla",15);
 
     }
 

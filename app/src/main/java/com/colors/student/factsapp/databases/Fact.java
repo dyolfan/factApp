@@ -11,7 +11,7 @@ public class Fact implements Comparable<Fact>{
     public String text;
     public String shortText;
     public int rating;
-    public boolean oppened = false;
+    public boolean opened = false;
 
     public Fact(int id, String txt, int rating){
         this.id = id;
