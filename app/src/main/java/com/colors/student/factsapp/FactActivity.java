@@ -48,6 +48,8 @@ import static android.content.ContentValues.TAG;
  */
 
 public class FactActivity extends AppCompatActivity {
+    DatabaseReference mDatabase;
+    FactList list = new FactList();
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +73,7 @@ public class FactActivity extends AppCompatActivity {
 
         String message = intent.getExtras().getString("category");
         category.setText(message);
+
 
         mDatabase = FirebaseDatabase.getInstance("https://factsapp-19a2f.firebaseio.com/").getReference().child(message);
         list = new FactList();
@@ -171,7 +174,5 @@ public class FactActivity extends AppCompatActivity {
     protected boolean shouldAskPermissions() {
         return (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP_MR1);
     }
-
-
 
 }

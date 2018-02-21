@@ -1,26 +1,17 @@
 package com.colors.student.factsapp.databases;
 
-import android.renderscript.Sampler;
 import android.util.Log;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.security.Key;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-import java.util.Set;
+
 import java.util.TreeSet;
 
-import static android.content.ContentValues.TAG;
 
 /**
  * Created by kirils on 16.02.18.
@@ -66,6 +57,11 @@ public class FactList {
                 it.add(fact);
                 break;
         }
+    }
+    public void userAddFact(String factText, String category){
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
+        Fact newFact = new Fact(factText, 0);
+        dbRef.child(category).push().setValue(newFact);
     }
 
 
@@ -146,101 +142,5 @@ public class FactList {
         rating = (int)(Math.random() * range) - 50;
     }
 
-//    public void write(String category, Fact fact) throws IOException {
-//        List<Fact> writeList = null;
-//        String fileName = "";
-//        switch (category) {
-//            case "Sports":
-//                sports.add(fact);
-//                writeList = sports;
-//                fileName = "sports.txt";
-//                break;
-//            case "Animals":
-//                animals.add(fact);
-//                writeList = animals;
-//                fileName = "/animals.dat";
-//                break;
-//            case "Politics":
-//                politics.add(fact);
-//                writeList = politics;
-//                fileName = "/politics.dat";
-//                break;
-//            case "History":
-//                history.add(fact);
-//                writeList = history;
-//                fileName = "/history.dat";
-//                break;
-//            case "IT":
-//                it.add(fact);
-//                writeList = it;
-//                fileName = "/it.dat";
-//                break;
-//        }
-//
-//
-//        FileOutputStream f = new FileOutputStream(new File("sdcard/" + fileName));
-//        ObjectOutputStream o = new ObjectOutputStream(f);
-//
-//        // Write objects to file
-//        o.writeObject(fact);
-//
-//        o.close();
-//        f.close();
-//
-////        FileOutputStream outStream = null;
-////        try {
-////            File f = new File(Environment.getExternalStorageDirectory(), fileName);
-////            outStream = new FileOutputStream(f);
-////            ObjectOutputStream objectOutStream = new ObjectOutputStream(outStream);
-////            objectOutStream.writeObject(writeList);
-////            objectOutStream.close();
-////        } catch (FileNotFoundException e1) {
-////            e1.printStackTrace();
-////        } catch (IOException e1) {
-////            e1.printStackTrace();
-////        }
-//    }
-//
-//    public void loadState(String category) {
-//        List<Fact> s =null;
-//        FileInputStream inStream = null;
-//        try {
-//            File f = new File(Environment.getExternalStorageDirectory(), "sdcard/sports.txt");
-//            inStream = new FileInputStream(f);
-//            ObjectInputStream objectInStream = new ObjectInputStream(inStream);
-//
-//            s = ((List<Fact>) objectInStream.readObject());
-//            objectInStream.close();
-//        } catch (FileNotFoundException e1) {
-//            e1.printStackTrace();
-//        } catch (ClassNotFoundException e1) {
-//            e1.printStackTrace();
-//        } catch (OptionalDataException e1) {
-//            e1.printStackTrace();
-//        } catch (StreamCorruptedException e1) {
-//            e1.printStackTrace();
-//        } catch (IOException e1) {
-//            e1.printStackTrace();
-//        }
-//
-//        switch (category) {
-//            case "Sports":
-//                sports = s;
-//                break;
-//            case "Animals":
-//                animals = s;
-//                break;
-//            case "Politics":
-//                politics = s;
-//                break;
-//            case "History":
-//                history = s;
-//                break;
-//            case "IT":
-//                it = s;
-//                break;
-//        }
-//
-//    }
 
 }
