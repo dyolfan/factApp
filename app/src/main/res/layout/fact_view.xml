@@ -96,6 +96,7 @@
 
                         android:text="Fact Text "
                         android:textAlignment="center"
+                        android:textColor="@color/colorAccent"
                         android:textSize="34sp"
                         app:layout_constraintBottom_toTopOf="@+id/favouriteFact"
                         app:layout_constraintEnd_toEndOf="parent"

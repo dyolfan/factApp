@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
         Button politics = this.findViewById(R.id.politicsBtn);
 
 
+
         topFactsBtn.setOnClickListener((v) -> {
             startActivity(intents.topFact);
         });
@@ -78,7 +79,5 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("category", buttonText);
             startActivity(intent);
         });
-
-
     }
 }
