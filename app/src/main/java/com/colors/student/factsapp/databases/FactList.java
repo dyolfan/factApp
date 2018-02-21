@@ -1,11 +1,26 @@
 package com.colors.student.factsapp.databases;
 
+import android.renderscript.Sampler;
+import android.util.Log;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.security.Key;
+import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+import java.util.Set;
 import java.util.TreeSet;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by kirils on 16.02.18.
@@ -21,6 +36,7 @@ public class FactList {
     public TreeSet<Fact> top = new TreeSet<>();
     int rating;
     boolean sorted = false;
+    int previousRandom = 0;
 
     public FactList() {
         this.sports = new LinkedList<>();
@@ -29,6 +45,30 @@ public class FactList {
         this.history = new LinkedList<>();
         this.it = new LinkedList<>();
     }
+//    public void loadFacts(String category) {
+//        switch (category) {
+//            case "Sports":
+//                // Code witch gets data
+////            sports.addAll();
+//                break;
+//            case "Animals":
+//                // Code witch gets data
+////        animals.addAll();
+//                break;
+//            case "Politics":
+//                // Code witch gets data
+////         politics.addAll();
+//                break;
+//            case "History":
+//                // Code witch gets data
+////        history.addAll();
+//                break;
+//            case "IT":
+//                // Code witch gets data
+////        it.add(fact);
+//                break;
+//        }
+//    }
 
     public void addFact(String category, Fact fact) {
         randomRating();
@@ -52,22 +92,78 @@ public class FactList {
         }
     }
 
-    public Fact getFact(String category) {
 
+
+//    public void setCategory(String text) {
+//        DatabaseReference mDatabase = FirebaseDatabase.getInstance("https://factsapp-19a2f.firebaseio.com/").getReference().child(text);
+//        mDatabase.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                // This method is called once with the initial value and again
+//                // whenever data at this location is updated.
+//                for (DataSnapshot uniqueKeySnapshot : dataSnapshot.getChildren()){
+//                    String text = uniqueKeySnapshot.child("text").getValue().toString();
+//                    int rating = Integer.parseInt(uniqueKeySnapshot.child("rating").getValue().toString());
+//                    Log.i("tag: ", text);
+//                    Log.i("tag: ", Integer.toString(rating));
+//
+//                    Fact newFact = new Fact(text, rating);
+//                    switch (text) {
+//                        case "Sports":
+//                            sports.add(newFact);
+//                            break;
+//                        case "Animals":
+//                            animals.add(newFact);
+//                            break;
+//                        case "Politics":
+//                            politics.add(newFact);
+//                            break;
+//                        case "History":
+//                            history.add(newFact);
+//                            break;
+//                        case "IT":
+//                            history.add(newFact);
+//                            break;
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError error) {
+//                // Failed to read value
+//                Log.w(TAG, "Failed to read value.", error.toException());
+//            }
+//        });
+//    }
+
+    public Fact getFact(String category) {
         Random rand = new Random();
-        int randn = rand.nextInt(19);
+        int randn = 0;
         switch (category) {
             case "Sports":
+                do {
+                    randn = rand.nextInt(sports.size()-1);
+                } while (previousRandom == randn);
                 return sports.get(randn);
             case "Animals":
+                do {
+                    randn = rand.nextInt(animals.size()-1);
+                } while (previousRandom == randn);
                 return animals.get(randn);
             case "Politics":
+                do {
+                    randn = rand.nextInt(politics.size()-1);
+                } while (previousRandom == randn);
                 return politics.get(randn);
             case "History":
-
+                do {
+                    randn = rand.nextInt(history.size()-1);
+                } while (previousRandom == randn);
                 return history.get(randn);
             case "IT":
-                randn = rand.nextInt(31);
+                do {
+                    randn = rand.nextInt(it.size()-1);
+                } while (previousRandom == randn);
                 return it.get(randn);
         }
         return null;

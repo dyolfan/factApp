@@ -8,6 +8,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Spinner;
 
+import com.colors.student.factsapp.databases.FactList;
+
 /**
  * Created by Helena on 16/02/18.
  */
@@ -33,7 +35,7 @@ public class AddFact extends AppCompatActivity {
         submitFact.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+//TODO: ADD A FACT
             }
         });
         toMenu.setOnClickListener(new View.OnClickListener() {

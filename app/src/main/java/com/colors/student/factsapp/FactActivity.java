@@ -20,15 +20,25 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ShareActionProvider;
 
+import com.colors.student.factsapp.databases.Fact;
+import com.colors.student.factsapp.databases.FactList;
 import com.facebook.share.model.SharePhoto;
 import com.facebook.share.widget.ShareDialog;
 import com.colors.student.factsapp.databases.FactController;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 
 /**
@@ -36,6 +46,8 @@ import java.util.ArrayList;
  */
 
 public class FactActivity extends AppCompatActivity {
+    FactList list;
+    DatabaseReference mDatabase;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,14 +72,50 @@ public class FactActivity extends AppCompatActivity {
         String message = intent.getExtras().getString("category");
         category.setText(message);
 
-        FactController fc = new FactController();
-        fc.setList();
-        factBox.setText(fc.factList.getFact(message).getText());
-
-        getFact.setOnClickListener(new View.OnClickListener() {
+        mDatabase = FirebaseDatabase.getInstance("https://factsapp-19a2f.firebaseio.com/").getReference().child(message);
+        list = new FactList();
+        mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                factBox.setText(fc.factList.getFact(message).getText());
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // This method is called once with the initial value and again
+                // whenever data at this location is updated.
+                for (DataSnapshot uniqueKeySnapshot : dataSnapshot.getChildren()){
+                    String text = uniqueKeySnapshot.child("text").getValue().toString();
+                    int rating = Integer.parseInt(uniqueKeySnapshot.child("rating").getValue().toString());
+                    Fact newFact = new Fact(text, rating);
+                    Log.i("tag: ", newFact.toString());
+                    switch (message) {
+                        case "Sports":
+                            list.sports.add(newFact);
+                            break;
+                        case "Animals":
+                            list.animals.add(newFact);
+                            break;
+                        case "Politics":
+                            list.politics.add(newFact);
+                            break;
+                        case "History":
+                            list.history.add(newFact);
+                            break;
+                        case "IT":
+                            list.it.add(newFact);
+                            break;
+                    }
+                }
+                factBox.setText(list.getFact(message).getText());
+                getFact.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        factBox.setText(list.getFact(message).getText());
+                        Log.i("list: ", Integer.toString(list.sports.size()));
+                    }
+                });
+
+            }
+            @Override
+            public void onCancelled(DatabaseError error) {
+                // Failed to read value
+                Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
 

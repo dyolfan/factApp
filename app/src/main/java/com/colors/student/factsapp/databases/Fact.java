@@ -7,17 +7,16 @@ import android.support.annotation.NonNull;
  */
 
 public class Fact implements Comparable<Fact>{
-    public int id;
     public String text;
     public String shortText;
     public int rating;
     public boolean oppened = false;
 
-    public Fact(int id, String txt, int rating){
-        this.id = id;
+    public Fact(String txt, int rating){
         this.text = txt;
         this.rating = rating;
         this.shortText = getShortText();
+        this.oppened = false;
     }
 
     public String getText(){
