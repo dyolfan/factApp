@@ -9,7 +9,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;git
+import java.util.Random;
 import java.util.TreeSet;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
@@ -37,7 +37,7 @@ public class FactList {
         this.it = new LinkedList<>();
     }
 
-    public void userAddFact(String factText, String category) {
+    public void userAddFact(String factText, String category, String url) {
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
         Fact newFact = new Fact(factText);
         dbRef.child(category).push().setValue(newFact);
@@ -116,10 +116,5 @@ public class FactList {
                     topTen.add(it.get(i));
                 break;
         }
-    }
-
-    public void randomRating() {
-        int range = (50 + 50) + 1;
-        rating = (int) (Math.random() * range) - 50;
     }
 }
