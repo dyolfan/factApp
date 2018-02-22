@@ -12,7 +12,7 @@ public class Fact implements Comparable<Fact> {
     public String text;
     public String shortText;
     public int rating;
-    public boolean oppened = false;
+    public boolean opened = false;
 
     public Fact(String txt, int rating, String key) {
         this.key = key;

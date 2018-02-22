@@ -65,7 +65,6 @@ public class FavouritesActivity extends AppCompatActivity {
                 startActivity(intents.mainMenu);
             }
         });
-
     }
 
     public class Fact {

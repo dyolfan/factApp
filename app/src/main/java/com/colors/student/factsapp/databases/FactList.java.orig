@@ -6,7 +6,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;git
+import java.util.Random;
 import java.util.TreeSet;
 
 /**
@@ -32,8 +32,35 @@ public class FactList {
         this.it = new LinkedList<>();
     }
 
+<<<<<<< HEAD
+    public void addFact(String category, Fact fact) {
+        randomRating();
+        fact.rating = rating;
+        switch (category) {
+            case "Sports":
+                sports.add(fact);
+                break;
+            case "Animals":
+                animals.add(fact);
+                break;
+            case "Politics":
+                politics.add(fact);
+                break;
+            case "History":
+                history.add(fact);
+                break;
+            case "IT":
+                it.add(fact);
+                break;
+        }
+    }
+
+    public void userAddFact(String factText, String category, String url) {
+        DatabaseReference dbRef = FirebaseDatabase.getInstance(urgit l).getReference();
+=======
     public void userAddFact(String factText, String category) {
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
+>>>>>>> b25cdc57fb2fe6efeed47f588500316400624497
         Fact newFact = new Fact(factText, 0, "0");
         dbRef.child(category).push().setValue(newFact);
     }
