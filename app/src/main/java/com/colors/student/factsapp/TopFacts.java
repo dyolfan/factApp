@@ -215,12 +215,12 @@ public class TopFacts extends AppCompatActivity {
         rs[i].setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!facts[x].oppened) {
+                if (!facts[x].opened) {
                     rs[i].setText(facts[i].getText());
-                    facts[x].oppened = true;
+                    facts[x].opened = true;
                 } else {
                     rs[i].setText(facts[i].getShortText());
-                    facts[x].oppened = false;
+                    facts[x].opened = false;
                 }
             }
         });
