@@ -14,7 +14,6 @@ public class Fact implements Comparable<Fact> {
     public int rating;
     public boolean opened = false;
 
-
     public Fact(String txt) {
         this.text = txt;
         this.rating = 0;

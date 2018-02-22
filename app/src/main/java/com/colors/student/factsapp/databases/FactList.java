@@ -1,5 +1,8 @@
 package com.colors.student.factsapp.databases;
 
+import android.content.Context;
+import android.widget.Toast;
+
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -8,6 +11,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;git
 import java.util.TreeSet;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 /**
  * Created by kirils on 16.02.18.
@@ -34,8 +39,13 @@ public class FactList {
 
     public void userAddFact(String factText, String category) {
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
-        Fact newFact = new Fact(factText, 0, "0");
+        Fact newFact = new Fact(factText);
         dbRef.child(category).push().setValue(newFact);
+        Context context = getApplicationContext();
+        CharSequence text = "Fact added";
+        int duration = Toast.LENGTH_SHORT;
+        Toast toast = Toast.makeText(context, text, duration);
+        toast.show();
     }
 
 

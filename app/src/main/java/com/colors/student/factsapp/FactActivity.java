@@ -4,9 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.RequiresApi;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -14,10 +12,9 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.ScrollView;
-import android.widget.ShareActionProvider;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.colors.student.factsapp.databases.Fact;
 import com.colors.student.factsapp.databases.FactList;
@@ -33,6 +30,7 @@ import java.io.IOException;
 
 import static android.content.ContentValues.TAG;
 import static com.colors.student.factsapp.MainActivity.sQLiteHelper;
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 /**
@@ -81,7 +79,7 @@ public class FactActivity extends AppCompatActivity {
                     String key = uniqueKeySnapshot.getKey();
                     String text = uniqueKeySnapshot.child("text").getValue().toString();
                     int rating = Integer.parseInt(uniqueKeySnapshot.child("rating").getValue().toString());
-                    Fact newFact = new Fact(text, rating, key);
+                    Fact newFact = new Fact(text, key);
                     switch (message) {
                         case "Sports":
                             list.sports.add(newFact);
@@ -113,64 +111,72 @@ public class FactActivity extends AppCompatActivity {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
-        getFact.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                currentFact = list.getFact(message);
-                currentFactToChange = mDatabase.child(currentFact.getKey()).child("rating");
-                factBox.setText(currentFact.getText());
 
-            }
-        });
+    getFact.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            currentFact = list.getFact(message);
+            currentFactToChange = mDatabase.child(currentFact.getKey()).child("rating");
+            factBox.setText(currentFact.getText());
 
-favourite.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View v) {
-        String factString = currentFact.getText();
-        FavouritesModel contact = new FavouritesModel(factString);
-        sQLiteHelper.insertRecord(contact);
-    }
-});
+        }
+    });
+
+    favourite.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View v) {
+            String factString = currentFact.getText();
+            FavouritesModel contact = new FavouritesModel(factString);
+            sQLiteHelper.insertRecord(contact);
+            Context context = getApplicationContext();
+            CharSequence text = "Fact added to favorites";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
+    });
 
     toMenu.setOnClickListener(view -> {
         open = false;
         startActivity(intents.mainMenu);
     });
 
-share.setOnClickListener(view -> {
-    factBox.setDrawingCacheEnabled(true);
-    Bitmap bitmap = factBox.getDrawingCache();
+    share.setOnClickListener(view -> {
+        factBox.setDrawingCacheEnabled(true);
+        Bitmap bitmap = factBox.getDrawingCache();
 
-    try {
-        File cachePath = new File(context.getCacheDir(), "images");
-        cachePath.mkdirs(); // don't forget to make the directory
-        FileOutputStream stream = new FileOutputStream(cachePath + "/image.png");
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-        stream.close();
-    } catch (IOException e) {
-        e.printStackTrace();
-    }
+        try {
+            File cachePath = new File(context.getCacheDir(), "images");
+            cachePath.mkdirs(); // don't forget to make the directory
+            FileOutputStream stream = new FileOutputStream(cachePath + "/image.png");
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+            stream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-    File imagePath = new File(context.getCacheDir(), "images");
-    File newFile = new File(imagePath, "image.png");
-    Uri contentUri = FileProvider.getUriForFile(context, "com.colors.student.factsapp.fileprovider", newFile);
+        File imagePath = new File(context.getCacheDir(), "images");
+        File newFile = new File(imagePath, "image.png");
+        Uri contentUri = FileProvider.getUriForFile(context, "com.colors.student.factsapp.fileprovider", newFile);
 
-    if (contentUri != null) {
-        Intent shareIntent = new Intent();
-        shareIntent.setAction(Intent.ACTION_SEND);
-        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-        shareIntent.setDataAndType(contentUri, getContentResolver().getType(contentUri));
-        shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
-        startActivity(Intent.createChooser(shareIntent, "Choose an app"));
-    }
-});
+        if (contentUri != null) {
+            Intent shareIntent = new Intent();
+            shareIntent.setAction(Intent.ACTION_SEND);
+            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+            shareIntent.setDataAndType(contentUri, getContentResolver().getType(contentUri));
+            shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+            startActivity(Intent.createChooser(shareIntent, "Choose an app"));
+            CharSequence text = "Fact shared";
+            int duration = Toast.LENGTH_SHORT;
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+        }
+    });
 
 
     voteUp.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick(View view){
-            System.out.println(currentFact.getKey());
-            System.out.println(currentFact.getText());
             currentFactToChange.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -190,20 +196,14 @@ share.setOnClickListener(view -> {
         }
     });
 
-    voteDown.setOnClickListener(new View.OnClickListener()
-
-    {
+    voteDown.setOnClickListener(new View.OnClickListener() {
         @Override
         public void onClick (View view){
-            System.out.println(currentFact.getKey());
-            System.out.println(currentFact.getText());
-            System.out.println(mDatabase.child(currentFact.getKey()).child("rating"));
             currentFactToChange.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
                     String rating = dataSnapshot.getValue().toString();
                     int ratingInt = Integer.parseInt(rating);
-                    System.out.println(dataSnapshot);
                     try {
                         mDatabase.child(currentFact.getKey()).child("rating").setValue(ratingInt - 1);
                     } catch (Exception e) {
