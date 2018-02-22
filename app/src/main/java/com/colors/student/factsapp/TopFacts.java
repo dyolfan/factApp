@@ -18,9 +18,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import static android.content.ContentValues.TAG;
 
 /**
@@ -97,8 +94,9 @@ public class TopFacts extends AppCompatActivity {
                         if (!selectedString.contains(selected)) {
                             for (DataSnapshot uniqueKeySnapshot : dataSnapshot.getChildren()) {
                                 String text = uniqueKeySnapshot.child("text").getValue().toString();
+                                String key = uniqueKeySnapshot.getKey();
                                 int rating = Integer.parseInt(uniqueKeySnapshot.child("rating").getValue().toString());
-                                Fact newFact = new Fact(text, rating);
+                                Fact newFact = new Fact(text, rating, key);
                                 Log.i("tag: ", newFact.toString());
 
                                 switch (selected) {
@@ -180,10 +178,6 @@ public class TopFacts extends AppCompatActivity {
                 startActivity(intents.mainMenu);
             }
         });
-
-
-
-
     }
 
     private void changeTop(String category) {

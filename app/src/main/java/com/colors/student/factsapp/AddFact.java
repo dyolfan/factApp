@@ -45,8 +45,7 @@ public class AddFact extends AppCompatActivity {
                 String selectedCat = mySpinner.getSelectedItem().toString();
                 Log.i("FACT", newFact);
                 Log.i("CATEGORY", selectedCat);
-             //   facts.userAddFact(newFact, selectedCat);
-
+                facts.userAddFact(newFact, selectedCat);
                 startActivity(intents.mainMenu);
             }
         });

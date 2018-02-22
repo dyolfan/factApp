@@ -2,10 +2,14 @@ package com.colors.student.factsapp;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Environment;
 import android.support.annotation.RequiresApi;
 import android.support.v4.content.FileProvider;
+import android.widget.ScrollView;
+import android.widget.ShareActionProvider;
 import android.widget.TextView;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,9 +21,13 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ShareActionProvider;
+import android.widget.TextView;
 
 import com.colors.student.factsapp.databases.Fact;
 import com.colors.student.factsapp.databases.FactList;
+import com.facebook.share.model.SharePhoto;
+import com.facebook.share.widget.ShareDialog;
+import com.colors.student.factsapp.databases.FactController;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,8 +35,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 
 import static com.colors.student.factsapp.MainActivity.sQLiteHelper;
 import static android.content.ContentValues.TAG;
@@ -40,8 +53,12 @@ import static android.content.ContentValues.TAG;
 
 public class FactActivity extends AppCompatActivity {
     private ShareActionProvider mShareActionProvider;
-DatabaseReference mDatabase;
+    DatabaseError databaseError;
+    DatabaseReference mDatabase;
     FactList list = new FactList();
+    private Fact currentFact;
+    DatabaseReference currentFactToChange;
+    TextView category;
 
 
     TextView category;

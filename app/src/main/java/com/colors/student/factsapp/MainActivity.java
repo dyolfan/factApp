@@ -98,5 +98,9 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("category", buttonText);
             startActivity(intent);
         });
+
+        //Creating local database using built in SQLite
+
+
     }
 }
