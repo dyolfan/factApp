@@ -19,7 +19,6 @@ public class Fact implements Comparable<Fact> {
         this.text = txt;
         this.rating = 0;
         this.shortText = getShortText();
-        this.opened = false;
     }
     public Fact(String txt, String key) {
         this.key = key;
