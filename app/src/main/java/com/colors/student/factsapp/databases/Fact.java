@@ -19,14 +19,14 @@ public class Fact implements Comparable<Fact> {
         this.text = txt;
         this.rating = rating;
         this.shortText = getShortText();
-        this.oppened = false;
+        this.opened = false;
     }
 
     public Fact(String txt) {
         this.text = txt;
         this.rating = 0;
         this.shortText = getShortText();
-        this.oppened = false;
+        this.opened = false;
     }
 
     public String getText() {

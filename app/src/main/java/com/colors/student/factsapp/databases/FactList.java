@@ -6,7 +6,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;git
+import java.util.Random;
 import java.util.TreeSet;
 
 /**
@@ -32,7 +32,7 @@ public class FactList {
         this.it = new LinkedList<>();
     }
 
-    public void userAddFact(String factText, String category) {
+    public void userAddFact(String factText, String category, String DBurl) {
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
         Fact newFact = new Fact(factText, 0, "0");
         dbRef.child(category).push().setValue(newFact);
