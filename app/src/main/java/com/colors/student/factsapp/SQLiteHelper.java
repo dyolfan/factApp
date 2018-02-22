@@ -26,9 +26,6 @@ public class SQLiteHelper  extends SQLiteOpenHelper {
     String TABLE_NAME = "Favourites";
     String COLUMN_AUTO_ID = "favId";//Auto incremented id, may be useful later
     String COLUMN_FACT = "favFact";
-    public SQLiteHelper(Context context) {
-        super(context, DATABASE_NAME, null, DATABASE_VERSION);
-    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
@@ -80,9 +77,9 @@ public class SQLiteHelper  extends SQLiteOpenHelper {
             do {
                 contactModel = new FavouritesModel();
                 contactModel.setID(cursor.getInt(0));
-                Log.d("FactID:", cursor.getInt(0) + "  ");
+
                 contactModel.setFact(cursor.getString(1));
-                Log.d("Fact:", cursor.getString(1) + "\n");
+
                 facts.add(contactModel);
             } while (cursor.moveToNext());
         }
@@ -100,9 +97,9 @@ public class SQLiteHelper  extends SQLiteOpenHelper {
             do {
                 contactModel = new FavouritesModel();
                 contactModel.setID(cursor.getInt(0));
-                Log.d("FactID:", cursor.getInt(0) + "  ");
+
                 contactModel.setFact(cursor.getString(1));
-                Log.d("Fact:", cursor.getString(1) + "\n");
+
                 facts.add(contactModel);
             } while (cursor.moveToNext());
         }

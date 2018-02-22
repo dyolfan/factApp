@@ -56,7 +56,5 @@ String DBurl = "https://factsapp-19a2f.firebaseio.com/";
                 startActivity(intents.mainMenu);
             }
         });
-
-
     }
 }
