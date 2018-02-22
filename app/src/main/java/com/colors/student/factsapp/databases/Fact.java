@@ -2,6 +2,7 @@ package com.colors.student.factsapp.databases;
 
 import android.support.annotation.NonNull;
 
+
 /**
  * Created by kirils on 14.02.18.
  */
