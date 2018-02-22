@@ -54,8 +54,8 @@ public class FactList {
         }
     }
 
-    public void userAddFact(String factText, String category) {
-        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
+    public void userAddFact(String factText, String category, String url) {
+        DatabaseReference dbRef = FirebaseDatabase.getInstance(urgit l).getReference();
         Fact newFact = new Fact(factText, 0, "0");
         dbRef.child(category).push().setValue(newFact);
     }

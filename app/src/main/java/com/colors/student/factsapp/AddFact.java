@@ -17,6 +17,7 @@ import com.colors.student.factsapp.databases.FactList;
  */
 
 public class AddFact extends AppCompatActivity {
+String DBurl = "https://factsapp-19a2f.firebaseio.com/";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class AddFact extends AppCompatActivity {
                 String selectedCat = mySpinner.getSelectedItem().toString();
                 Log.i("FACT", newFact);
                 Log.i("CATEGORY", selectedCat);
-                facts.userAddFact(newFact, selectedCat);
+                facts.userAddFact(newFact, selectedCat, DBurl);
                 startActivity(intents.mainMenu);
             }
         });
