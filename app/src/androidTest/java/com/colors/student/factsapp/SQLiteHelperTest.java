@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
 /**
  * Created by Peteris on 18.22.2.
  */
+
 public class SQLiteHelperTest {
     private SQLiteHelper mDb;
 
