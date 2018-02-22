@@ -2,6 +2,7 @@ package com.colors.student.factsapp.databases;
 
 import android.support.annotation.NonNull;
 
+
 /**
  * Created by kirils on 14.02.18.
  */
@@ -14,20 +15,26 @@ public class Fact implements Comparable<Fact> {
     public int rating;
     public boolean opened = false;
 
-    public Fact(String txt, int rating, String key) {
-        this.key = key;
-        this.text = txt;
-        this.rating = rating;
-        this.shortText = getShortText();
-        this.oppened = false;
-    }
-
     public Fact(String txt) {
         this.text = txt;
         this.rating = 0;
         this.shortText = getShortText();
-        this.oppened = false;
+        this.opened = false;
     }
+    public Fact(String txt, String key) {
+        this.key = key;
+        this.text = txt;
+        this.rating = 0;
+        this.shortText = getShortText();
+        this.opened = false;
+    }
+    public Fact(String txt, int rating) {
+        this.text = txt;
+        this.rating = rating;
+        this.shortText = getShortText();
+        this.opened = false;
+    }
+
 
     public String getText() {
         return this.text;
