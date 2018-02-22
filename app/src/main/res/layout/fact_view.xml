@@ -97,6 +97,7 @@
                         android:layout_marginStart="30dp"
 
                         android:gravity="center_vertical|center_horizontal|center"
+                        android:text="Loading..."
                         android:textAlignment="center"
                         android:textColor="@color/colorAccent"
                         android:textSize="30sp"

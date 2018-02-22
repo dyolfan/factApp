@@ -23,14 +23,12 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
 import static android.content.ContentValues.TAG;
 import static com.colors.student.factsapp.MainActivity.sQLiteHelper;
-import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 /**
@@ -38,20 +36,23 @@ import static com.facebook.FacebookSdk.getApplicationContext;
  */
 
 public class FactActivity extends AppCompatActivity {
-
-    DatabaseReference mDatabase;
+    private String android_id;
     FactList list = new FactList();
     private Fact currentFact;
     DatabaseReference currentFactToChange;
     TextView category;
     Boolean open;
+    DatabaseReference mDatabase;
+    boolean[] alreadyVoted = {false};
+    Context context;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         open = false;
-
-        Context context = this.getApplicationContext();
+        android_id = Secure.getString(this.getContentResolver(),
+                Secure.ANDROID_ID);
+        context = this.getApplicationContext();
         setContentView(R.layout.fact_view);
         Intents intents = new Intents(this);
         Intent intent = getIntent();
@@ -75,10 +76,8 @@ public class FactActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot uniqueKeySnapshot : dataSnapshot.getChildren()) {
-
                     String key = uniqueKeySnapshot.getKey();
                     String text = uniqueKeySnapshot.child("text").getValue().toString();
-                    int rating = Integer.parseInt(uniqueKeySnapshot.child("rating").getValue().toString());
                     Fact newFact = new Fact(text, key);
                     switch (message) {
                         case "Sports":
@@ -104,119 +103,129 @@ public class FactActivity extends AppCompatActivity {
                     currentFactToChange = mDatabase.child(currentFact.getKey()).child("rating");
                     factBox.setText(currentFact.getText());
                 }
+
+                getFact.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        currentFact = list.getFact(message);
+                        currentFactToChange = mDatabase.child(currentFact.getKey()).child("rating");
+                        factBox.setText(currentFact.getText());
+                        alreadyVoted[0] = false;
+                    }
+                });
+
+                favourite.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String factString = currentFact.getText();
+                        FavouritesModel contact = new FavouritesModel(factString);
+                        sQLiteHelper.insertRecord(contact);
+                    }
+                });
+
+                share.setOnClickListener(view -> {
+                    factBox.setDrawingCacheEnabled(true);
+                    Bitmap bitmap = factBox.getDrawingCache();
+
+                    try {
+                        File cachePath = new File(context.getCacheDir(), "images");
+                        cachePath.mkdirs(); // don't forget to make the directory
+                        FileOutputStream stream = new FileOutputStream(cachePath + "/image.png");
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                        stream.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+
+                    File imagePath = new File(context.getCacheDir(), "images");
+                    File newFile = new File(imagePath, "image.png");
+                    Uri contentUri = FileProvider.getUriForFile(context, "com.colors.student.factsapp.fileprovider", newFile);
+
+                    if (contentUri != null) {
+                        Intent shareIntent = new Intent();
+                        shareIntent.setAction(Intent.ACTION_SEND);
+                        shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+                        shareIntent.setDataAndType(contentUri, getContentResolver().getType(contentUri));
+                        shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
+                        startActivity(Intent.createChooser(shareIntent, "Choose an app"));
+                    }
+                });
+
+                voteUp.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        applyVotes(true);
+                    }
+                });
+
+                voteDown.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        applyVotes(false);
+                    }
+                });
             }
+
             @Override
             public void onCancelled(DatabaseError error) {
                 Log.w(TAG, "Failed to read value.", error.toException());
             }
         });
 
-    getFact.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            currentFact = list.getFact(message);
-            currentFactToChange = mDatabase.child(currentFact.getKey()).child("rating");
-            factBox.setText(currentFact.getText());
-
-        }
-    });
-
-    favourite.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View v) {
-            String factString = currentFact.getText();
-            FavouritesModel contact = new FavouritesModel(factString);
-            sQLiteHelper.insertRecord(contact);
-            Context context = getApplicationContext();
-            CharSequence text = "Fact added to favorites";
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-        }
-    });
-
-    toMenu.setOnClickListener(view -> {
-        open = false;
-        startActivity(intents.mainMenu);
-    });
-
-    share.setOnClickListener(view -> {
-        factBox.setDrawingCacheEnabled(true);
-        Bitmap bitmap = factBox.getDrawingCache();
-
-        try {
-            File cachePath = new File(context.getCacheDir(), "images");
-            cachePath.mkdirs(); // don't forget to make the directory
-            FileOutputStream stream = new FileOutputStream(cachePath + "/image.png");
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            stream.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        File imagePath = new File(context.getCacheDir(), "images");
-        File newFile = new File(imagePath, "image.png");
-        Uri contentUri = FileProvider.getUriForFile(context, "com.colors.student.factsapp.fileprovider", newFile);
-
-        if (contentUri != null) {
-            Intent shareIntent = new Intent();
-            shareIntent.setAction(Intent.ACTION_SEND);
-            shareIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
-            shareIntent.setDataAndType(contentUri, getContentResolver().getType(contentUri));
-            shareIntent.putExtra(Intent.EXTRA_STREAM, contentUri);
-            startActivity(Intent.createChooser(shareIntent, "Choose an app"));
-            CharSequence text = "Fact shared";
-            int duration = Toast.LENGTH_SHORT;
-            Toast toast = Toast.makeText(context, text, duration);
-            toast.show();
-        }
-    });
-
-
-    voteUp.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view){
-            currentFactToChange.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    String rating = dataSnapshot.getValue().toString();
-                    int ratingInt = Integer.parseInt(rating);
-                    try{
-                        mDatabase.child(currentFact.getKey()).child("rating").setValue(ratingInt + 1);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Log.w(TAG, "onCancelled", databaseError.toException());
-                }
-            });
-        }
-    });
-
-    voteDown.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick (View view){
-            currentFactToChange.addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    String rating = dataSnapshot.getValue().toString();
-                    int ratingInt = Integer.parseInt(rating);
-                    try {
-                        mDatabase.child(currentFact.getKey()).child("rating").setValue(ratingInt - 1);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Log.w(TAG, "onCancelled", databaseError.toException());
-                }
-            });
-        }
-    });
-
+        toMenu.setOnClickListener(view -> {
+            open = false;
+            startActivity(intents.mainMenu);
+        });
     }
+
+    private void applyVotes(boolean up) {
+        System.out.println(currentFact.getKey());
+        System.out.println(currentFact.getText());
+        currentFactToChange.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String rating = dataSnapshot.getValue().toString();
+                int ratingInt = Integer.parseInt(rating);
+                mDatabase.child(currentFact.getKey()).child("ips").getRef().addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot x : dataSnapshot.getChildren()) {
+                            Log.i("ID value", x.getValue().toString());
+                            boolean test = x.getValue().toString().equals(android_id);
+                            Log.i("Already voted", String.format("%b", test));
+                            if (x.getValue().toString().equals(android_id)) ;
+                            alreadyVoted[0] = true;
+                        }
+                        if (!alreadyVoted[0]) {
+                            try {
+                                if (up)
+                                    mDatabase.child(currentFact.getKey()).child("rating").setValue(ratingInt + 1);
+                                else
+                                    mDatabase.child(currentFact.getKey()).child("rating").setValue(ratingInt - 1);
+                                Log.i("Result", "applied");
+                                mDatabase.child(currentFact.getKey()).child("ips").push().setValue(android_id);
+                                alreadyVoted[0] = true;
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            Toast toast = Toast.makeText(context, "You have already voted", Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Log.w(TAG, "onCancelled", databaseError.toException());
+            }
+        });
+    }
+
 }
