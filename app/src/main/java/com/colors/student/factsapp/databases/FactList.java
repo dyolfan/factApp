@@ -36,27 +36,6 @@ public class FactList {
         this.it = new LinkedList<>();
     }
 
-    public void addFact(String category, Fact fact) {
-        randomRating();
-        fact.rating= rating;
-                switch (category) {
-            case "Sports":
-                sports.add(fact);
-                break;
-            case "Animals":
-                animals.add(fact);
-                break;
-            case "Politics":
-                politics.add(fact);
-                break;
-            case "History":
-                history.add(fact);
-                break;
-            case "IT":
-                it.add(fact);
-                break;
-        }
-    }
     public void userAddFact(String factText, String category){
         DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
         Fact newFact = new Fact(factText, 0, "0");
