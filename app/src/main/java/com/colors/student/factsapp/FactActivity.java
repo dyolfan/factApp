@@ -49,7 +49,6 @@ public class FactActivity extends AppCompatActivity {
     FactList list = new FactList();
     private Fact currentFact;
     DatabaseReference currentFactToChange;
-    TextView category;
     Boolean open;
     DatabaseReference mDatabase;
     boolean[] alreadyVoted = {false};
@@ -85,10 +84,8 @@ public class FactActivity extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot uniqueKeySnapshot : dataSnapshot.getChildren()) {
-
                     String key = uniqueKeySnapshot.getKey();
                     String text = uniqueKeySnapshot.child("text").getValue().toString();
-                    int rating = Integer.parseInt(uniqueKeySnapshot.child("rating").getValue().toString());
                     Fact newFact = new Fact(text, key);
                     switch (message) {
                         case "Sports":
