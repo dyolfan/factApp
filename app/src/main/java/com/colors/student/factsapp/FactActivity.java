@@ -45,10 +45,12 @@ public class FactActivity extends AppCompatActivity {
     private Fact currentFact;
     DatabaseReference currentFactToChange;
     TextView category;
+    Boolean open;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        open = false;
 
         Context context = this.getApplicationContext();
         setContentView(R.layout.fact_view);
@@ -59,8 +61,7 @@ public class FactActivity extends AppCompatActivity {
         Button getFact = findViewById(R.id.getFact);
         ImageButton share = findViewById(R.id.shareBtn);
         ImageButton toMenu = findViewById(R.id.backBtn);
-        TextView factBox = this.findViewById(R.id.factBox);
-//        LinearLayout thisView = findViewById(R.id.thisFact);//this view i want to make a image of
+        TextView factBox = findViewById(R.id.factBox);
         ScrollView thisFact = findViewById(R.id.wholeFact);
 
         Button voteUp = findViewById(R.id.voteUpBtn);
@@ -71,7 +72,6 @@ public class FactActivity extends AppCompatActivity {
 
         //Favourite/SQLite related variables
         ImageButton favourite = findViewById(R.id.favouriteFact);
-        TextView factToBeFavourited = findViewById(R.id.factBox);
 
         mDatabase = FirebaseDatabase.getInstance("https://factsapp-19a2f.firebaseio.com/").getReference().child(message);
         list = new FactList();
@@ -104,7 +104,15 @@ public class FactActivity extends AppCompatActivity {
                             break;
                     }
                 }
+                if(!open){
+                    open = true;
+
+                    currentFact = list.getFact(message);
+                    currentFactToChange = mDatabase.child(currentFact.getKey()).child("rating");
+                    factBox.setText(currentFact.getText());
+                }
             }
+
 
             @Override
             public void onCancelled(DatabaseError error) {
@@ -114,6 +122,8 @@ public class FactActivity extends AppCompatActivity {
 
 
     });
+
+
 
         getFact.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,13 +137,7 @@ public class FactActivity extends AppCompatActivity {
         });
 
     toMenu.setOnClickListener(view -> {
-        Intent myIntent = new Intent(Intent.ACTION_SEND);
-        intent.setType("text/plain");
-        String shareText = "Your Body here";
-        String shareSub = "Subtitle";
-        myIntent.putExtra(Intent.EXTRA_TEXT, shareText);
-        myIntent.putExtra(Intent.EXTRA_SUBJECT, shareSub);
-        startActivity(Intent.createChooser(myIntent, "Share using"));
+        open = false;
         startActivity(intents.mainMenu);
     });
 
@@ -144,7 +148,7 @@ public class FactActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             //sQLiteHelper.remakeTable();
-            String factString = factToBeFavourited.getText().toString();
+            String factString = factBox.getText().toString();
             FavouritesModel contact = new FavouritesModel(factString);
             sQLiteHelper.insertRecord(contact);
             //FavouritesModel delpls = new FavouritesModel(factToBeFavourited.getText().toString());

@@ -74,7 +74,6 @@ public class FavouritesActivity extends AppCompatActivity {
     }
 
 
-
     private void setListeners(final int i) {
         final int x = i;
         facts[i].view.setOnClickListener(new View.OnClickListener() {
