@@ -6,15 +6,15 @@ package com.colors.student.factsapp;
 //Object where we store a fact and its details(id,category)
 public class FavouritesModel {
 
-    private int id;
     int category;
     String fact;
+    private int id;
 
-    FavouritesModel(){
+    FavouritesModel() {
 
     }
 
-    FavouritesModel(String fact){
+    FavouritesModel(String fact) {
         this.fact = fact;
     }
 

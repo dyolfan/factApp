@@ -81,23 +81,27 @@
                 android:orientation="horizontal">
 
                 <ScrollView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:id="@+id/wholeFact"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
                     android:layout_weight="1">
 
                     <TextView
                         android:id="@+id/factBox"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_gravity="center"
                         android:layout_marginBottom="20dp"
-                        android:layout_marginEnd="50dp"
-                        android:layout_marginStart="50dp"
-                        android:layout_marginTop="40dp"
+                        android:layout_marginEnd="30dp"
+                        android:layout_marginStart="30dp"
 
-                        android:text="Loading..."
+                        android:layout_marginTop="20dp"
+                        android:gravity="center_vertical|center_horizontal|center"
                         android:textAlignment="center"
                         android:textColor="@color/colorAccent"
-                        android:textSize="34sp"
+                        android:textSize="30sp"
                         app:layout_constraintBottom_toTopOf="@+id/favouriteFact"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"

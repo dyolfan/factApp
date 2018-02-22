@@ -1,26 +1,13 @@
 package com.colors.student.factsapp;
 
-import android.content.Intent;
-import android.content.pm.PackageInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.Signature;
+import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-import android.util.Base64;
-import android.util.Log;
 import android.view.Window;
 import android.widget.ProgressBar;
 
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 
 public class LoadingActivity extends AppCompatActivity {
-
-
     private static int SPLASH_TIME_OUT = 2500;
     ProgressBar loading;
     private int progressStatus = 0;
@@ -36,14 +23,10 @@ public class LoadingActivity extends AppCompatActivity {
         Intents intents = new Intents(this);
 
 
-
-
         new Thread(new Runnable() {
             public void run() {
                 while (progressStatus < 100) {
                     progressStatus += 10;
-                    // Update the progress bar and display the
-                    //current value in the text view
                     handler.post(new Runnable() {
                         public void run() {
                             loading.setProgress(progressStatus);
@@ -60,7 +43,6 @@ public class LoadingActivity extends AppCompatActivity {
         }).start();
 
 
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -68,7 +50,6 @@ public class LoadingActivity extends AppCompatActivity {
                 finish();
             }
         }, SPLASH_TIME_OUT);
-
 
 
     }

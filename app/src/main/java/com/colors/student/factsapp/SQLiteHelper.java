@@ -1,12 +1,10 @@
 package com.colors.student.factsapp;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,20 +20,21 @@ public class SQLiteHelper  extends SQLiteOpenHelper {
 
     public SQLiteHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
-       // database = this.getWritableDatabase();
     }
 
 
     String TABLE_NAME = "Favourites";
     String COLUMN_AUTO_ID = "favId";//Auto incremented id, may be useful later
     String COLUMN_FACT = "favFact";
+    public SQLiteHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+    }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("create table " + TABLE_NAME + " ( " + COLUMN_AUTO_ID +
                 " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_FACT + " VARCHAR);");
     }
-
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
@@ -48,13 +47,13 @@ public class SQLiteHelper  extends SQLiteOpenHelper {
     //Inserts object (the "Fact" we just favourited) info into our database,
     // contact is the newly created fact aka Class FavouritesModel object
     public void insertRecord(FavouritesModel contact) {
-        if(FactAlreadyAdded(contact.getFact())){
-            Log.d("Fact '", contact.getFact()+"' is already added\n");
+        if (FactAlreadyAdded(contact.getFact())) {
+            Log.d("Fact '", contact.getFact() + "' is already added\n");
             return;
         }
         database = this.getWritableDatabase();
-        database.execSQL("INSERT INTO " + TABLE_NAME + "(" + COLUMN_FACT + ") VALUES('" + contact.getFact() +"')");
-        Log.d("InsertedFact", contact.getFact()+"\n");
+        database.execSQL("INSERT INTO " + TABLE_NAME + "(" + COLUMN_FACT + ") VALUES('" + contact.getFact() + "')");
+        Log.d("InsertedFact", contact.getFact() + "\n");
         database.close();
     }
 
@@ -81,9 +80,9 @@ public class SQLiteHelper  extends SQLiteOpenHelper {
             do {
                 contactModel = new FavouritesModel();
                 contactModel.setID(cursor.getInt(0));
-                Log.d("FactID:", cursor.getInt(0)+"  ");
+                Log.d("FactID:", cursor.getInt(0) + "  ");
                 contactModel.setFact(cursor.getString(1));
-                Log.d("Fact:", cursor.getString(1)+"\n");
+                Log.d("Fact:", cursor.getString(1) + "\n");
                 facts.add(contactModel);
             } while (cursor.moveToNext());
         }
@@ -101,9 +100,9 @@ public class SQLiteHelper  extends SQLiteOpenHelper {
             do {
                 contactModel = new FavouritesModel();
                 contactModel.setID(cursor.getInt(0));
-                Log.d("FactID:", cursor.getInt(0)+"  ");
+                Log.d("FactID:", cursor.getInt(0) + "  ");
                 contactModel.setFact(cursor.getString(1));
-                Log.d("Fact:", cursor.getString(1)+"\n");
+                Log.d("Fact:", cursor.getString(1) + "\n");
                 facts.add(contactModel);
             } while (cursor.moveToNext());
         }
