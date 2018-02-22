@@ -43,9 +43,13 @@ String DBurl = "https://factsapp-19a2f.firebaseio.com/";
                 TextInputEditText fact = findViewById(R.id.newFactText);
                 String newFact = fact.getText().toString();
                 String selectedCat = mySpinner.getSelectedItem().toString();
+<<<<<<< HEAD
+                facts.userAddFact(newFact, selectedCat);
+=======
                 Log.i("FACT", newFact);
                 Log.i("CATEGORY", selectedCat);
                 facts.userAddFact(newFact, selectedCat, DBurl);
+>>>>>>> 8f1b6b9dadf33c1a0116aa2fc4a1611055256f32
                 startActivity(intents.mainMenu);
             }
         });
