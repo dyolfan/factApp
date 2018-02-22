@@ -42,8 +42,6 @@ public class AddFact extends AppCompatActivity {
                 TextInputEditText fact = findViewById(R.id.newFactText);
                 String newFact = fact.getText().toString();
                 String selectedCat = mySpinner.getSelectedItem().toString();
-                Log.i("FACT", newFact);
-                Log.i("CATEGORY", selectedCat);
                 facts.userAddFact(newFact, selectedCat);
                 startActivity(intents.mainMenu);
             }
