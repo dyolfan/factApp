@@ -28,7 +28,6 @@ public class AddFact extends AppCompatActivity {
         Spinner mySpinner = findViewById(R.id.chooseCatgory);
 
 
-
         Spinner spinner = this.findViewById(R.id.chooseCatgory);
         ArrayAdapter adapter = ArrayAdapter.createFromResource(this,
                 R.array.categoryList, R.layout.spinner_item);
@@ -49,6 +48,7 @@ public class AddFact extends AppCompatActivity {
                 startActivity(intents.mainMenu);
             }
         });
+
         toMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
