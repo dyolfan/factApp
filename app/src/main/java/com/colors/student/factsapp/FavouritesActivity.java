@@ -1,11 +1,9 @@
 package com.colors.student.factsapp;
 
-import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -20,47 +18,30 @@ import static com.colors.student.factsapp.MainActivity.sQLiteHelper;
  */
 
 public class FavouritesActivity extends AppCompatActivity {
-
-    private Fact[] facts;
     private List<Fact> list = new ArrayList<>();
 
-    public class Fact{
-        String shortFact;
-        TextView view;
-        boolean opened = false;
-        String fullFact;
-        Fact(String shortFact, String fullFact, TextView view){
-            this.shortFact = shortFact;
-            this.fullFact = fullFact;
-            this.view = view;
-        }
-    }
-
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.favourites_view);
 
         ImageButton toMainMenu = findViewById(R.id.toMainMenu);
         Intents intents = new Intents(this);
-        ImageButton favourite = findViewById(R.id.favouriteFact);
-// Models list \/
         List<FavouritesModel> arrayList = sQLiteHelper.getAllRecords();
 
         for (FavouritesModel x : arrayList) {
-            TextView tv=new TextView(this);
+            TextView tv = new TextView(this);
             tv.setWidth(300);
             tv.setTextColor(Color.BLACK);
             tv.setBackgroundColor(Color.rgb(66, 165, 245));
             tv.setTextSize(30);
-            tv.setPadding(5,5,5,5);
+            tv.setPadding(5, 5, 5, 5);
             LinearLayout layout = this.findViewById(R.id.facts);
-
             LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
                     LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            layoutParams.setMargins(0, 15, 0,15);
+            layoutParams.setMargins(0, 15, 0, 15);
 
-            Fact newFact = new Fact(x.getFact().substring(0, 14)+ "... ", x.getFact(), tv);
+            Fact newFact = new Fact(x.getFact().substring(0, 14) + "... ", x.getFact(), tv);
             list.add(newFact);
             tv.setText(newFact.shortFact);
             layout.addView(tv, layoutParams);
@@ -70,16 +51,13 @@ public class FavouritesActivity extends AppCompatActivity {
                     if (!newFact.opened) {
                         newFact.view.setText(newFact.fullFact);
                         newFact.opened = true;
-                    }   else { newFact.view.setText(newFact.shortFact);
+                    } else {
+                        newFact.view.setText(newFact.shortFact);
                         newFact.opened = false;
                     }
                 }
-                });
+            });
         }
-
-
-//        for (int i = 0; i < facts.length; i++)
-//            setListeners(i);
 
         toMainMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -88,5 +66,18 @@ public class FavouritesActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    public class Fact {
+        String shortFact;
+        TextView view;
+        boolean opened = false;
+        String fullFact;
+
+        Fact(String shortFact, String fullFact, TextView view) {
+            this.shortFact = shortFact;
+            this.fullFact = fullFact;
+            this.view = view;
+        }
     }
 }
