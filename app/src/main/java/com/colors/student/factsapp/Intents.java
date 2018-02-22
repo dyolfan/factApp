@@ -18,7 +18,7 @@ public class Intents extends AppCompatActivity {
     Intent newFact;
 
 
-    Intents(Context thisContext){
+    Intents(Context thisContext) {
         this.mainMenu = new Intent(thisContext, MainActivity.class);
         this.loading = new Intent(thisContext, LoadingActivity.class);
         this.login = new Intent(thisContext, LoginActivity.class);
