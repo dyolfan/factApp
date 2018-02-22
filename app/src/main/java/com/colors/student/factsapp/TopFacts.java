@@ -2,6 +2,7 @@ package com.colors.student.factsapp;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,10 +12,23 @@ import android.widget.TextView;
 
 import com.colors.student.factsapp.databases.Fact;
 import com.colors.student.factsapp.databases.FactController;
+import com.colors.student.factsapp.databases.FactList;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by kirils on 13.02.18.
  */
+
+
 
 public class TopFacts extends AppCompatActivity {
     private Fact[] facts = new Fact[10];
@@ -29,7 +43,15 @@ public class TopFacts extends AppCompatActivity {
     private TextView r9;
     private TextView r10;
     private TextView[] rs;
-    private FactController fc = new FactController();
+    private static FactList list = new FactList();
+    private static DatabaseReference dRef;
+    String selected = "Sports";
+    boolean wasSelectedSports = false;
+    boolean wasSelectedAnimals = false;
+    boolean wasSelectedPolitics = false;
+    boolean wasSelectedIt = false;
+    boolean wasSelectedHistory = false;
+    String selectedString = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,21 +81,93 @@ public class TopFacts extends AppCompatActivity {
         r10 = (TextView) this.findViewById(R.id.fact_r10);
         TextView[] rs1 = {r1,r2,r3,r4,r5,r6,r7,r8,r9,r10};
         rs = rs1;
-        fc.setList();
+        list = new FactList();
 
-        fc.factList.sortTopFacts("Sports");
-
-        for(int i = 0; i <10; i++)
-            rs[i].setText(fc.factList.sports.get(i).getShortText());
-        facts = fc.factList.sports.toArray(facts);
-        for (int i = 0; i < 10; i++)
-            setListeners(i);
+// Thread code ends
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    String selected = spinner.getSelectedItem().toString();
-                    changeTop(selected);
+                selected = spinner.getSelectedItem().toString();
+                dRef = FirebaseDatabase.getInstance("https://factsapp-19a2f.firebaseio.com/").getReference().child(selected);
+                dRef.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        // This method is called once with the initial value and again
+                        // whenever data at this location is updated.
+                        if (!selectedString.contains(selected)) {
+                            for (DataSnapshot uniqueKeySnapshot : dataSnapshot.getChildren()) {
+                                String text = uniqueKeySnapshot.child("text").getValue().toString();
+                                String key = uniqueKeySnapshot.getKey();
+                                int rating = Integer.parseInt(uniqueKeySnapshot.child("rating").getValue().toString());
+                                Fact newFact = new Fact(text, rating, key);
+                                Log.i("tag: ", newFact.toString());
+
+                                switch (selected) {
+                                    case "Sports":
+                                        list.sports.add(newFact);
+                                        break;
+                                    case "Animals":
+                                        list.animals.add(newFact);
+                                        break;
+                                    case "Politics":
+                                        list.politics.add(newFact);
+                                        break;
+                                    case "History":
+                                        list.history.add(newFact);
+                                        break;
+                                    case "IT":
+                                        list.it.add(newFact);
+                                        break;
+                                }
+                            }
+
+                            switch (selected) {
+                                case "Sports":
+                                    for (int i = 0; i < 10; i++)
+                                        rs[i].setText(list.sports.get(i).getShortText());
+                                    facts = list.sports.toArray(facts);
+                                    wasSelectedSports = true;
+                                    break;
+                                case "Animals":
+                                    for (int i = 0; i < 10; i++)
+                                        rs[i].setText(list.animals.get(i).getShortText());
+                                    facts = list.animals.toArray(facts);
+                                    wasSelectedAnimals = true;
+                                    break;
+                                case "Politics":
+                                    for (int i = 0; i < 10; i++)
+                                        rs[i].setText(list.politics.get(i).getShortText());
+                                    facts = list.politics.toArray(facts);
+                                    wasSelectedPolitics = true;
+                                    break;
+                                case "History":
+                                    for (int i = 0; i < 10; i++)
+                                        rs[i].setText(list.history.get(i).getShortText());
+                                    facts = list.sports.toArray(facts);
+                                    wasSelectedHistory = true;
+                                    break;
+                                case "IT":
+                                    for (int i = 0; i < 10; i++)
+                                        rs[i].setText(list.it.get(i).getShortText());
+                                    facts = list.sports.toArray(facts);
+                                    wasSelectedIt = true;
+                                    break;
+                            }
+                            for (int i = 0; i < 10; i++)
+                                setListeners(i);
+                            selectedString += selected;
+                        }
+                        changeTop(selected);
+
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError error) {
+                        // Failed to read value
+                        Log.w(TAG, "Failed to read value.", error.toException());
+                    }
+                });
             }
 
             @Override
@@ -93,36 +187,36 @@ public class TopFacts extends AppCompatActivity {
     private void changeTop(String category) {
         switch (category) {
             case "Sports":
-                fc.factList.sortTopFacts(category);
+                list.sortTopFacts(category);
                 for(int i = 0; i <10; i++)
-                    rs[i].setText(fc.factList.sports.get(i).getShortText());
-                facts = fc.factList.sports.toArray(facts);
+                    rs[i].setText(list.sports.get(i).getShortText());
+                facts = list.sports.toArray(facts);
                 break;
 
             case "Animals":
-                fc.factList.sortTopFacts(category);
+                list.sortTopFacts(category);
                 for(int i = 0; i <10; i++)
-                    rs[i].setText(fc.factList.animals.get(i).getShortText());
-                facts = fc.factList.animals.toArray(facts);
+                    rs[i].setText(list.animals.get(i).getShortText());
+                facts = list.animals.toArray(facts);
                 break;
 
             case "Politics":
-                fc.factList.sortTopFacts(category);
+                list.sortTopFacts(category);
                 for(int i = 0; i <10; i++)
-                    rs[i].setText(fc.factList.animals.get(i).getShortText());
-                facts = fc.factList.politics.toArray(facts);
+                    rs[i].setText(list.politics.get(i).getShortText());
+                facts = list.politics.toArray(facts);
                 break;
             case "History":
-                fc.factList.sortTopFacts(category);
+                list.sortTopFacts(category);
                 for(int i = 0; i <10; i++)
-                    rs[i].setText(fc.factList.history.get(i).getShortText());
-                facts = fc.factList.history.toArray(facts);
+                    rs[i].setText(list.history.get(i).getShortText());
+                facts = list.history.toArray(facts);
                 break;
             case "IT":
-                fc.factList.sortTopFacts(category);
+                list.sortTopFacts(category);
                 for(int i = 0; i <10; i++)
-                    rs[i].setText(fc.factList.it.get(i).getShortText());
-                facts = fc.factList.it.toArray(facts);
+                    rs[i].setText(list.it.get(i).getShortText());
+                facts = list.it.toArray(facts);
                 break;
         }
         for (int i = 0; i < 10; i++)

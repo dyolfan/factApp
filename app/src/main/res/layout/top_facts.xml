@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:backgroundTint="#FFC5CAE9">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@drawable/fact_bcg1"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,7 +21,6 @@
             android:layout_width="match_parent"
             android:layout_height="90dp"
             android:layout_weight="1"
-            android:background="?colorPrimaryDark"
             android:clipToPadding="false"
             android:elevation="7dp"
             app:contentInsetLeft="0dp"
@@ -76,6 +76,7 @@
                 android:layout_marginEnd="40dp"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="20dp"
+                android:background="@color/colorPrimaryDark"
                 android:entries="@array/categoryList" />
 
             <ScrollView
@@ -90,12 +91,12 @@
 
                     <TextView
                         android:id="@+id/fact_r1"
-                        android:layout_width="301dp"
+                        android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:background="#ff9800"
+                        android:background="#C842A5F5"
                         android:padding="5dp"
-                        android:text="Start of fact 1 ..."
+                        android:text="Loading.."
                         android:textColor="@android:color/black"
                         android:textSize="27sp" />
 
@@ -103,10 +104,10 @@
                         android:id="@+id/fact_r2"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:background="#f44336"
+                        android:layout_marginTop="3dp"
+                        android:background="#C842A5F5"
                         android:padding="5dp"
-                        android:text="Start of fact 2 ..."
+                        android:text="Loading.."
                         android:textColor="@android:color/black"
                         android:textSize="27sp" />
 
@@ -114,10 +115,10 @@
                         android:id="@+id/fact_r3"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:background="#9c27b0"
+                        android:layout_marginTop="3dp"
+                        android:background="#C842A5F5"
                         android:padding="5dp"
-                        android:text="Start of fact 3 ..."
+                        android:text="Loading.."
                         android:textColor="@android:color/black"
                         android:textSize="27sp" />
 
@@ -125,10 +126,10 @@
                         android:id="@+id/fact_r4"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:background="#3f51b5"
+                        android:layout_marginTop="3dp"
+                        android:background="#C842A5F5"
                         android:padding="5dp"
-                        android:text="Start of fact 4 ..."
+                        android:text="Loading.."
                         android:textColor="@android:color/black"
                         android:textSize="27sp" />
 
@@ -136,10 +137,10 @@
                         android:id="@+id/fact_r5"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:background="#009688"
+                        android:layout_marginTop="3dp"
+                        android:background="#C842A5F5"
                         android:padding="5dp"
-                        android:text="Start of fact 5 ..."
+                        android:text="Loading.."
                         android:textColor="@android:color/black"
                         android:textSize="27sp" />
 
@@ -147,10 +148,10 @@
                         android:id="@+id/fact_r6"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:background="#43A047"
+                        android:layout_marginTop="3dp"
+                        android:background="#C842A5F5"
                         android:padding="5dp"
-                        android:text="Start of fact 6 ..."
+                        android:text="Loading.."
                         android:textColor="@android:color/black"
                         android:textSize="27sp" />
 
@@ -158,10 +159,10 @@
                         android:id="@+id/fact_r7"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:background="#7CB342"
+                        android:layout_marginTop="3dp"
+                        android:background="#C842A5F5"
                         android:padding="5dp"
-                        android:text="Start of fact 7 ..."
+                        android:text="Loading.."
                         android:textColor="@android:color/black"
                         android:textSize="27sp" />
 
@@ -169,10 +170,10 @@
                         android:id="@+id/fact_r8"
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:background="#C0CA33"
+                        android:layout_marginTop="3dp"
+                        android:background="#C842A5F5"
                         android:padding="5dp"
-                        android:text="Start of fact 8..."
+                        android:text="Loading.."
                         android:textColor="@android:color/black"
                         android:textSize="27sp" />
 
@@ -181,9 +182,9 @@
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:background="#FDD835"
+                        android:background="#C842A5F5"
                         android:padding="5dp"
-                        android:text="Start of fact 9..."
+                        android:text="Loading.."
                         android:textColor="@android:color/black"
                         android:textSize="27sp" />
 
@@ -192,9 +193,9 @@
                         android:layout_width="300dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
-                        android:background="#FFB300"
+                        android:background="#C842A5F5"
                         android:padding="5dp"
-                        android:text="Start of fact 10 ..."
+                        android:text="Loading.."
                         android:textColor="@android:color/black"
                         android:textSize="27sp" />
                 </LinearLayout>

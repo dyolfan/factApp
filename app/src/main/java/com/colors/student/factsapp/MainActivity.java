@@ -8,11 +8,25 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Properties;
 
 /**
  * Created by kirils on 13.02.18.
@@ -20,11 +34,16 @@ import java.security.NoSuchAlgorithmException;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static SQLiteHelper sQLiteHelper;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.main_menu);
+
+        sQLiteHelper = new SQLiteHelper(this);
+
 
         Intents intents = new Intents(this);
         Button topFactsBtn = this.findViewById(R.id.topfactsBtn);
@@ -36,6 +55,7 @@ public class MainActivity extends AppCompatActivity {
         Button history = this.findViewById(R.id.historyBtn);
         Button it = this.findViewById(R.id.itBtn);
         Button politics = this.findViewById(R.id.politicsBtn);
+
 
 
         topFactsBtn.setOnClickListener((v) -> {
@@ -78,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("category", buttonText);
             startActivity(intent);
         });
+
+        //Creating local database using built in SQLite
 
 
     }

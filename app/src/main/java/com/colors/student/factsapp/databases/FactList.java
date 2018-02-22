@@ -1,11 +1,17 @@
 package com.colors.student.factsapp.databases;
 
+import android.util.Log;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
+
 import java.util.TreeSet;
+
 
 /**
  * Created by kirils on 16.02.18.
@@ -20,7 +26,7 @@ public class FactList {
     public List<Fact> it;
     public TreeSet<Fact> top = new TreeSet<>();
     int rating;
-    boolean sorted = false;
+    int previousRandom = 0;
 
     public FactList() {
         this.sports = new LinkedList<>();
@@ -51,23 +57,41 @@ public class FactList {
                 break;
         }
     }
+    public void userAddFact(String factText, String category){
+        DatabaseReference dbRef = FirebaseDatabase.getInstance().getReference();
+        Fact newFact = new Fact(factText, 0, "0");
+        dbRef.child(category).push().setValue(newFact);
+    }
+
 
     public Fact getFact(String category) {
-
         Random rand = new Random();
-        int randn = rand.nextInt(19);
+        int randn = 0;
         switch (category) {
             case "Sports":
+                do {
+                    randn = rand.nextInt(sports.size()-1);
+                } while (previousRandom == randn);
                 return sports.get(randn);
             case "Animals":
+                do {
+                    randn = rand.nextInt(animals.size()-1);
+                } while (previousRandom == randn);
                 return animals.get(randn);
             case "Politics":
+                do {
+                    randn = rand.nextInt(politics.size()-1);
+                } while (previousRandom == randn);
                 return politics.get(randn);
             case "History":
-
+                do {
+                    randn = rand.nextInt(history.size()-1);
+                } while (previousRandom == randn);
                 return history.get(randn);
             case "IT":
-                randn = rand.nextInt(31);
+                do {
+                    randn = rand.nextInt(it.size()-1);
+                } while (previousRandom == randn);
                 return it.get(randn);
         }
         return null;
@@ -75,7 +99,6 @@ public class FactList {
 
     public void sortTopFacts(String category) {
         List<Fact> topTen = new LinkedList<>();
-        if(!sorted) {
             Collections.sort(sports);
             Collections.reverse(sports);
             Collections.sort(animals);
@@ -86,7 +109,6 @@ public class FactList {
             Collections.reverse(history);
             Collections.sort(it);
             Collections.reverse(it);
-        }
         switch (category) {
             case "Sports":
                 for(int i=0; i<10; i++)
@@ -102,11 +124,11 @@ public class FactList {
                 break;
             case "History":
                 for(int i=0; i<10; i++)
-                    topTen.add(politics.get(i));
+                    topTen.add(history.get(i));
                 break;
             case "IT":
                 for(int i=0; i<10; i++)
-                    topTen.add(politics.get(i));
+                    topTen.add(it.get(i));
                 break;
         }
     }
@@ -117,101 +139,5 @@ public class FactList {
         rating = (int)(Math.random() * range) - 50;
     }
 
-//    public void write(String category, Fact fact) throws IOException {
-//        List<Fact> writeList = null;
-//        String fileName = "";
-//        switch (category) {
-//            case "Sports":
-//                sports.add(fact);
-//                writeList = sports;
-//                fileName = "sports.txt";
-//                break;
-//            case "Animals":
-//                animals.add(fact);
-//                writeList = animals;
-//                fileName = "/animals.dat";
-//                break;
-//            case "Politics":
-//                politics.add(fact);
-//                writeList = politics;
-//                fileName = "/politics.dat";
-//                break;
-//            case "History":
-//                history.add(fact);
-//                writeList = history;
-//                fileName = "/history.dat";
-//                break;
-//            case "IT":
-//                it.add(fact);
-//                writeList = it;
-//                fileName = "/it.dat";
-//                break;
-//        }
-//
-//
-//        FileOutputStream f = new FileOutputStream(new File("sdcard/" + fileName));
-//        ObjectOutputStream o = new ObjectOutputStream(f);
-//
-//        // Write objects to file
-//        o.writeObject(fact);
-//
-//        o.close();
-//        f.close();
-//
-////        FileOutputStream outStream = null;
-////        try {
-////            File f = new File(Environment.getExternalStorageDirectory(), fileName);
-////            outStream = new FileOutputStream(f);
-////            ObjectOutputStream objectOutStream = new ObjectOutputStream(outStream);
-////            objectOutStream.writeObject(writeList);
-////            objectOutStream.close();
-////        } catch (FileNotFoundException e1) {
-////            e1.printStackTrace();
-////        } catch (IOException e1) {
-////            e1.printStackTrace();
-////        }
-//    }
-//
-//    public void loadState(String category) {
-//        List<Fact> s =null;
-//        FileInputStream inStream = null;
-//        try {
-//            File f = new File(Environment.getExternalStorageDirectory(), "sdcard/sports.txt");
-//            inStream = new FileInputStream(f);
-//            ObjectInputStream objectInStream = new ObjectInputStream(inStream);
-//
-//            s = ((List<Fact>) objectInStream.readObject());
-//            objectInStream.close();
-//        } catch (FileNotFoundException e1) {
-//            e1.printStackTrace();
-//        } catch (ClassNotFoundException e1) {
-//            e1.printStackTrace();
-//        } catch (OptionalDataException e1) {
-//            e1.printStackTrace();
-//        } catch (StreamCorruptedException e1) {
-//            e1.printStackTrace();
-//        } catch (IOException e1) {
-//            e1.printStackTrace();
-//        }
-//
-//        switch (category) {
-//            case "Sports":
-//                sports = s;
-//                break;
-//            case "Animals":
-//                animals = s;
-//                break;
-//            case "Politics":
-//                politics = s;
-//                break;
-//            case "History":
-//                history = s;
-//                break;
-//            case "IT":
-//                it = s;
-//                break;
-//        }
-//
-//    }
 
 }
