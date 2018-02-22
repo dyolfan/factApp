@@ -105,7 +105,6 @@ public class FactActivity extends AppCompatActivity {
                     factBox.setText(currentFact.getText());
                 }
             }
-
             @Override
             public void onCancelled(DatabaseError error) {
                 Log.w(TAG, "Failed to read value.", error.toException());
@@ -183,7 +182,7 @@ public class FactActivity extends AppCompatActivity {
                     String rating = dataSnapshot.getValue().toString();
                     int ratingInt = Integer.parseInt(rating);
                     try{
-                        mDatabase.child(currentFact.getKey()).child("rating").setValue(ratingInt+1);
+                        mDatabase.child(currentFact.getKey()).child("rating").setValue(ratingInt + 1);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -220,5 +219,4 @@ public class FactActivity extends AppCompatActivity {
     });
 
     }
-
 }
