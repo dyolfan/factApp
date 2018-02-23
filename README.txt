@@ -1,4 +1,4 @@
-FactApp version 1.0
+﻿FactApp version 1.0
 
 README
 
@@ -19,16 +19,13 @@ AUTHORS
 
 REQUIREMENTS
 
-	For the app to function the device must have an Android API version 24 or higher. It won't work
-	on older versions. 
+	For the app to function the device must have an Android API version 24 or higher. It won't work on older versions. 
 
 INSTALLATION
 
-	To run this project in your own Android Studio just download the files anywhere on your device 
-	where you store your projects and file -> Open and find the folder where you downloaded all of
-	the files.
+	To run this project in your own Android Studio just download the files anywhere on your device where you store your projects and file -> Open and find the folder where you downloaded all of the files.
 
-	To connect the app to your own google Firebase in Android Studio under tools there is Firebase - 
-	select that and folow the steps provided there. Only play where you manually have to change this
-	link is in the class AddFact.java there is a String variable named DBUrl. 
+	To run the app you phone you need Android APK version 24 and up, with lover versions you will run into problems. 
+
+	To connect the app to your own google Firebase in Android Studio under tools there is Firebase - select that and folow the steps provided there. Only play where you manually have to change this link is in the class AddFact.java there is a String variable named DBUrl. 
 
