@@ -15,7 +15,7 @@ README
 
 AUTHORS
 	
-	Creators of this code are Anatolij Putimcev, Pēteris Bērziņš, Kiril Putimcev, Mārtiņs Vītols, Helēna Zvirbule
+	Creators of this code are Anatolij Bikmulin, Pēteris Bērziņš, Kiril Putimcev, Mārtiņs Vītols, Helēna Zvirbule
 
 REQUIREMENTS
 
