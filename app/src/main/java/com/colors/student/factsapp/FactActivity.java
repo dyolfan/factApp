@@ -46,6 +46,7 @@ public class FactActivity extends AppCompatActivity {
     DatabaseReference mDatabase;
     boolean[] alreadyVoted = {false};
     Context context;
+    public static String toastTestMsg = "";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,7 +63,6 @@ public class FactActivity extends AppCompatActivity {
         ImageButton share = findViewById(R.id.shareBtn);
         ImageButton toMenu = findViewById(R.id.backBtn);
         TextView factBox = findViewById(R.id.factBox);
-        ScrollView thisFact = findViewById(R.id.wholeFact);
 
         Button voteUp = findViewById(R.id.voteUpBtn);
         Button voteDown = findViewById(R.id.voteDownBtn);
@@ -204,6 +204,7 @@ public class FactActivity extends AppCompatActivity {
                             alreadyVoted[0] = true;
                         }
                         if (!alreadyVoted[0]) {
+                            toastTestMsg = "Applied vote";
                             try {
                                 if (up)
                                     mDatabase.child(currentFact.getKey()).child("rating").setValue(ratingInt + 1);
@@ -216,6 +217,7 @@ public class FactActivity extends AppCompatActivity {
                                 e.printStackTrace();
                             }
                         } else {
+                            toastTestMsg = "You have already voted";
                             Toast toast = Toast.makeText(context, "You have already voted", Toast.LENGTH_SHORT);
                             toast.show();
                         }
