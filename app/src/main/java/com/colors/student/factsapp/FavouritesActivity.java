@@ -1,5 +1,6 @@
 package com.colors.student.factsapp;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;

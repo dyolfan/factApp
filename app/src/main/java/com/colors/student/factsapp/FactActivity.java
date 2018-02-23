@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -50,8 +51,8 @@ public class FactActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         open = false;
-        android_id = Secure.getString(this.getContentResolver(),
-                Secure.ANDROID_ID);
+        android_id = Settings.Secure.getString(this.getContentResolver(),
+                Settings.Secure.ANDROID_ID);
         context = this.getApplicationContext();
         setContentView(R.layout.fact_view);
         Intents intents = new Intents(this);
@@ -119,7 +120,13 @@ public class FactActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         String factString = currentFact.getText();
                         FavouritesModel contact = new FavouritesModel(factString);
-                        sQLiteHelper.insertRecord(contact);
+                        if(sQLiteHelper.insertRecord(contact)){
+                            Toast toast = Toast.makeText(context, "Fact added to favorites", Toast.LENGTH_SHORT);
+                            toast.show();
+                        } else {
+                            Toast toast = Toast.makeText(context, "Fact already added", Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
                     }
                 });
 

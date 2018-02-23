@@ -10,9 +10,13 @@ android {
         versionName "1.0"
         multiDexEnabled true
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+<<<<<<< HEAD
+=======
 
 
 
+
+>>>>>>> ae0cbe86f2d7d8c5b4e9da262df55e8691397e36
     }
     buildTypes {
         release {
@@ -41,17 +45,15 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.android.support:animated-vector-drawable:27.0.2'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
-<<<<<<< HEAD
     implementation 'com.google.firebase:firebase-database:11.8.0'
     implementation 'com.firebaseui:firebase-ui-database:0.4.0'
-=======
-    implementation 'com.google.firebase:firebase-config:11.0.4'
-    testImplementation 'junit:junit:4.12'
->>>>>>> PeterisBranch
+    testImplementation 'junit:junit:4.12'    
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     implementation 'com.android.support:design:26.1.0'
     implementation 'com.facebook.android:facebook-android-sdk:4.30.0'
+    androidTestCompile 'com.android.support.test:rules:1.0.1'
+
 
     implementation 'com.android.support:multidex:1.0.2'
     androidTestCompile 'com.android.support:support-annotations:27.0.2'
@@ -61,6 +63,7 @@ dependencies {
     androidTestCompile 'com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     }
+
 //firebase
     implementation 'com.google.firebase:firebase-core:11.8.0'
 

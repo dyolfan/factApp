@@ -65,7 +65,5 @@ public class AddFact extends AppCompatActivity {
                 startActivity(intents.mainMenu);
             }
         });
-
-
     }
 }
