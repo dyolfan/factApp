@@ -26,6 +26,7 @@ public class LoginActivity extends AppCompatActivity {
     CallbackManager callbackManager;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
